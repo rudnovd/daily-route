@@ -1,0 +1,61 @@
+name: Build android apk
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+jobs:
+  build-android:
+    permissions:
+      contents: write
+    runs-on: 'ubuntu-latest'
+    steps:
+      - uses: actions/checkout@v7
+      - name: setup node
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - name: install pnpm
+        uses: pnpm/setup@v2
+        with:
+          version: 11.20.0
+      - name: install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-linux-android,armv7-linux-androideabi,i686-linux-android,x86_64-linux-android
+      - name: install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf xdg-utils
+      - name: Set up JDK
+        uses: actions/setup-java@main
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v4
+      - name: Setup Android NDK
+        uses: nttld/setup-ndk@v1
+        id: setup-ndk
+        with:
+          ndk-version: r29
+          link-to-sdk: true
+      - name: Init mobile project
+        run: pnpm dlx @tauri-apps/cli android init
+      - name: Init keystore
+        run: |
+          cd src-tauri/gen/android
+          echo "keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}" > keystore.properties
+          echo "password=${{ secrets.ANDROID_KEY_PASSWORD }}" >> keystore.properties
+          base64 -d <<< "${{ secrets.ANDROID_KEY_BASE64 }}" > $RUNNER_TEMP/keystore.jks
+          echo "storeFile=$RUNNER_TEMP/keystore.jks" >> keystore.properties
+      - name: Install frontend dependencies
+        run: pnpm install
+      - uses: tauri-apps/tauri-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: v__VERSION__
+          releaseName: 'v__VERSION__'
+          releaseDraft: true
+          args: '--apk'
+          mobile: 'android'

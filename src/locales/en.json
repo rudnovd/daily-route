@@ -1,0 +1,95 @@
+{
+  "app": {
+    "noConnection": "No connection"
+  },
+  "index": {
+    "title": "Route",
+    "buttons": {
+      "startDailyRoute": "Start daily route",
+      "finishDailyRoute": "Finish daily route",
+      "cancel": "Cancel",
+      "continue": "Continue",
+      "pause": "Pause"
+    },
+    "loadingMap": "Loading map",
+    "generateRoute": "Generate route",
+    "startNotSet": "A starting point has not been set",
+    "radiusNotSet": "Route radius has not been set",
+    "setStart": "Set the starting point",
+    "setRadius": "Set route radius",
+    "tooFarFromStart": "Too far from the starting point",
+    "routeCancelled": "Route cancelled",
+    "routeCompleted": "Route completed",
+    "dailyRouteFinished": "Today’s daily route is на сегодня завершен",
+    "dailyRouteFrozen": "Today's daily route is frozen",
+    "dailyRouteCanceled": "Today's daily route has been cancelled",
+    "comeBackTomorrow": "Come back tomorrow"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": {
+      "title": "Language",
+      "selectLanguage": "Select language"
+    },
+    "startPoint": {
+      "title": "Start Point",
+      "saved": "Start point saved",
+      "buttons": {
+        "saveStart": "Save point"
+      }
+    },
+    "radius": {
+      "title": "Radius",
+      "meters": "Meters",
+      "saved": "Radius saved",
+      "buttons": {
+        "saveRadius": "Save radius"
+      }
+    },
+    "onboarding": {
+      "title": "Onboarding"
+    },
+    "signOut": {
+      "title": "Sign out",
+      "signOutFromAccount": "You have sign out of your account"
+    }
+  },
+  "profile": {
+    "title": "Profile",
+    "anonymous": "Anonymous",
+    "currentStreak": "Current streak",
+    "linkAccountToGoogle": "Link account to Google",
+    "signIn": {
+      "title": "Sign in",
+      "buttons": {
+        "signInWithGoogle": "Sign in with Google",
+        "continueAnonymously": "Continue anonymously"
+      },
+      "notifications": {
+        "successfullySignedIn": "You have successfully signed in",
+        "failedToSignedIn": "Failed to signed in"
+      }
+    }
+  },
+  "onboarding": {
+    "buttons": {
+      "start": "Start",
+      "next": "Next",
+      "prev": "Back",
+      "done": "Finish",
+      "finish": "Finish"
+    },
+    "description": [
+      "Welcome to {app} — the app for keeping a regular walking routine",
+      "Select a starting point and a radius to generate a random destination",
+      "Move every day and keep your walking streak"
+    ],
+    "steps": [
+      { "title": "Starting point", "description": "Drag the map to select a starting point. The route will be generated from this point" },
+      { "description": "Save the starting point" },
+      { "title": "Radius", "description": "Zoom in or out on the map to change the radius. The route waypoint will be generated within the selected radius" },
+      { "description": "Save the radius" },
+      { "description": "When you’re ready to start your route, press and hold the ‘Start daily route’ button. You can only complete the daily route once a day." }
+    ]
+  }
+}

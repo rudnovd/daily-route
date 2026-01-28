@@ -1,0 +1,5 @@
+[auth.external.google]
+enabled = true
+client_id = "env(VITE_GOOGLE_AUTH_CALLBACK)"
+secret = "env(VITE_SUPABASE_AUTH_EXTERNAL_GOOGLE_CLIENT_SECRET)"
+skip_nonce_check = false

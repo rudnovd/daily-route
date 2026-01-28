@@ -1,0 +1,21 @@
+{
+  "$schema": "../gen/schemas/android-schema.json",
+  "identifier": "mobile-capability",
+  "description": "enables the default permissions",
+  "windows": ["main"],
+  "platforms": ["android"],
+  "permissions": [
+    "core:default",
+    "geolocation:allow-check-permissions",
+    "geolocation:allow-request-permissions",
+    "os:default",
+    "geolocation:allow-get-current-position",
+    "geolocation:allow-watch-position",
+    "notification:default",
+    {
+      "identifier": "opener:allow-open-url",
+      "allow": [{ "url": "https://*" }, { "url": "dailyrouteapp://auth/callback" }]
+    },
+    "deep-link:default"
+  ]
+}

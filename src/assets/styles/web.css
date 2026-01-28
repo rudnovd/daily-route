@@ -1,0 +1,7 @@
+:root {
+  --navigation-header-padding-top: 0px;
+  --navbar-position-bottom: 0px;
+}
+.index-page {
+  grid-template-rows: 1fr 1fr;
+}

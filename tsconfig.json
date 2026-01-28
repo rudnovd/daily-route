@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "lib": ["esnext", "DOM"],
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "types": ["unplugin-icons/types/vue"],
+    "importHelpers": true,
+    "noEmit": true,
+    "removeComments": true,
+    "sourceMap": true,
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true,
+    "paths": { "@/*": ["./src/*"] },
+    "rootDir": "."
+  },
+  "vueCompilerOptions": {
+    "plugins": [
+      "vue-router/volar/sfc-route-blocks",
+      "vue-router/volar/sfc-typed-router"
+    ]
+  },
+  "references": [{ "path": "./tsconfig.node.json" }],
+  "include": ["src/**/*.ts", "src/**/*.vue", "./typed-router.d.ts"]
+}
