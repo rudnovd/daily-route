@@ -1,13 +1,26 @@
 name: Build android apk
+
 on:
-  push:
-    tags:
-      - 'v*.*.*'
+  workflow_run:
+    workflows: ["Release"]
+    types:
+      - completed
+
 jobs:
   build-android:
     permissions:
       contents: write
     runs-on: 'ubuntu-latest'
+    environment: production
+    env:
+      VITE_MAPTILER_API_KEY: ${{ vars.VITE_MAPTILER_API_KEY }}
+      VITE_OPEN_ROUTE_SERVICE_KEY: ${{ vars.VITE_OPEN_ROUTE_SERVICE_KEY }}
+      VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
+      VITE_SUPABASE_KEY: ${{ vars.VITE_SUPABASE_KEY }}
+      VITE_GOOGLE_CLIENT_ID: ${{ vars.VITE_GOOGLE_CLIENT_ID }}
+      VITE_SUPABASE_AUTH_EXTERNAL_GOOGLE_CLIENT_SECRET: ${{ vars.VITE_SUPABASE_AUTH_EXTERNAL_GOOGLE_CLIENT_SECRET }}
+      VITE_GOOGLE_AUTH_CALLBACK: ${{ vars.VITE_GOOGLE_AUTH_CALLBACK }}
+      VITE_IS_TAURI: true
     steps:
       - uses: actions/checkout@v7
       - name: setup node
