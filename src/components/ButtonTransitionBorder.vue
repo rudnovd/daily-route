@@ -44,7 +44,7 @@ function stopTransition(event: PointerEvent) {
 
 <style>
 @property --gradient-angle {
-  syntax: "<angle>";
+  syntax: '<angle>';
   initial-value: 0deg;
   inherits: false;
 }
@@ -59,7 +59,8 @@ function stopTransition(event: PointerEvent) {
     color: oklch(100% 0 0deg);
     background:
       linear-gradient(var(--color-error), var(--color-error)) padding-box,
-      conic-gradient(var(--color-accent) var(--gradient-angle), transparent calc(var(--gradient-angle) - 180deg)) border-box;
+      conic-gradient(var(--color-accent) var(--gradient-angle), transparent calc(var(--gradient-angle) - 180deg))
+        border-box;
     animation: change-gradient-angle var(--duration-long) linear;
   }
 }

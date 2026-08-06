@@ -1,6 +1,6 @@
 <template>
-  <NavigationHeader v-if="router.currentRoute.value.meta.title" />
-  <hr v-if="router.currentRoute.value.meta.title">
+  <NavigationHeader v-if="isTitleDisplayed" />
+  <hr v-if="isTitleDisplayed">
   <RouterView v-slot="{ Component }">
     <main :class="{ 'hide-top-padding': router.currentRoute.value.meta.hideTopPadding }">
       <KeepAlive include="index">
@@ -16,7 +16,7 @@
 <script setup lang="ts">
 import { config as maptilerConfig } from '@maptiler/sdk'
 import { whenever } from '@vueuse/core'
-import { defineAsyncComponent, onBeforeMount, onMounted, onUnmounted, ref } from 'vue'
+import { computed, defineAsyncComponent, onBeforeMount, onMounted, onUnmounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { toast, Toaster } from 'vue-sonner'
@@ -38,6 +38,9 @@ const NavigationHeader = defineAsyncComponent(() => import('./components/Navigat
 const Navbar = defineAsyncComponent(() => import('./components/Navbar.vue'))
 
 const router = useRouter()
+const isTitleDisplayed = computed<boolean>(() => {
+  return !!router.currentRoute.value.meta.title && !!router.currentRoute.value.meta.displayTitle
+})
 const userStore = useUserStore()
 const routeStore = useRouteStore()
 async function cancelExpiredRoute() {
@@ -121,12 +124,12 @@ whenever(() => userStore.isAuthenticated, () => {
 @import url('./assets/styles/root.css');
 @import url('./assets/styles/buttons.css');
 @import url('./assets/styles/notification.css');
-.navigation-header+hr {
+.navigation-header + hr {
   margin-block: var(--header-horizontal-rule-margin-block);
   border-width: var(--header-horizontal-rule-border-width);
   opacity: 0.6;
 }
-.navigation-header+hr+main {
+.navigation-header + hr + main {
   height: calc(100% - var(--header-height) - var(--navbar-height) - var(--navbar-position-bottom));
   padding-top: 0;
 }

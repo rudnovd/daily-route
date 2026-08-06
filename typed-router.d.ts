@@ -38,6 +38,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/[...path]': RouteRecordInfo<
+      '/[...path]',
+      '/:path(.*)',
+      { path: ParamValue<true> },
+      { path: ParamValue<false> },
+      | never
+    >,
     '/onboarding': RouteRecordInfo<
       '/onboarding',
       '/onboarding',
@@ -73,9 +80,9 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/settings/language': RouteRecordInfo<
-      '/settings/language',
-      '/settings/language',
+    '/settings/locale': RouteRecordInfo<
+      '/settings/locale',
+      '/settings/locale',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -100,6 +107,14 @@ declare module 'vue-router/auto-routes' {
         | never
       pathParamNames:
         | never
+    }
+    'src/pages/[...path].vue': {
+      routes:
+        | '/[...path]'
+      views:
+        | never
+      pathParamNames:
+        | 'path'
     }
     'src/pages/onboarding.vue': {
       routes:
@@ -141,9 +156,9 @@ declare module 'vue-router/auto-routes' {
       pathParamNames:
         | never
     }
-    'src/pages/settings/language.vue': {
+    'src/pages/settings/locale.vue': {
       routes:
-        | '/settings/language'
+        | '/settings/locale'
       views:
         | never
       pathParamNames:

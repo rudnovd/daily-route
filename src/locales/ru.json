@@ -27,9 +27,9 @@
   },
   "settings": {
     "title": "Настройки",
-    "language": {
+    "locale": {
       "title": "Язык",
-      "selectLanguage": "Выберите язык"
+      "selectLocale": "Выберите язык"
     },
     "startPoint": {
       "title": "Стартовая точка",
@@ -51,7 +51,10 @@
     },
     "signOut": {
       "title": "Выйти",
-      "signOutFromAccount": "Вы вышли из своей учетной записи"
+      "notifications": {
+        "signOutFromAccountSuccess": "Вы вышли из своей учетной записи",
+        "signOutFromAccountError": "Ошибка при выходе из учетной записи"
+      }
     }
   },
   "profile": {
@@ -72,6 +75,7 @@
     }
   },
   "onboarding": {
+    "title": "Ознакомительный тур",
     "buttons": {
       "start": "Начать",
       "next": "Далее",
@@ -90,5 +94,11 @@
       { "description": "Сохраните радиус" },
       { "description": "Когда вы будете готовы начать маршрут, нажмите и удерживайте кнопку «Начать ежедневный маршрут». Ежедневный маршрут можно проходить только один раз в день" }
     ]
+  },
+  "notFound": {
+    "index": "Страница не найдена",
+    "buttons": {
+      "backToHome": "Вернуться на главную"
+    }
   }
 }

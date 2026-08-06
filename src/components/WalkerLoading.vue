@@ -12,10 +12,10 @@ import MdiWalkIcon from '~icons/mdi/walk'
 <style>
 @keyframes scale-walk-icon-animation {
   from {
-    transform: scale(0.7)
+    transform: scale(0.7);
   }
   to {
-     transform: scale(1)
+    transform: scale(1);
   }
 }
 .walker-loading {

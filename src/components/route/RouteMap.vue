@@ -246,7 +246,7 @@ defineExpose({ isReady })
 </script>
 
 <style>
-@import url("@maptiler/sdk/dist/maptiler-sdk.css");
+@import url('@maptiler/sdk/dist/maptiler-sdk.css');
 .route-map {
   position: relative;
   height: 100%;

@@ -26,7 +26,7 @@ import { toast } from 'vue-sonner'
 import { useUserStore } from '@/stores/user'
 
 definePage({
-  meta: { title: 'profile.signIn.title' },
+  meta: { title: 'profile.signIn.title', displayTitle: true },
   beforeEnter() {
     if (useUserStore().isAuthenticated) {
       return '/'

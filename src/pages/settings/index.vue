@@ -2,16 +2,20 @@
   <section class="settings-page">
     <ul>
       <li>
-        <router-link class="button-link settings-page__element" to="/settings/language">
+        <router-link
+          class="button-link settings-page__element"
+          :class="{ 'button-link--disabled': isLoading }"
+          to="/settings/locale"
+        >
           <MdiTranslateIcon />
-          <span class="settings-page__element-text">{{ $t('settings.language.title') }}</span>
+          <span class="settings-page__element-text">{{ $t('settings.locale.title') }}</span>
           <MdiChevronRightIcon />
         </router-link>
       </li>
       <li>
         <router-link
           class="button-link settings-page__element"
-          :class="{ 'button-link--disabled': !!routeStore.path }"
+          :class="{ 'button-link--disabled': isLoading || !!routeStore.path }"
           to="/settings/edit?target=start"
         >
           <MdiMapMarkerIcon />
@@ -22,7 +26,7 @@
       <li>
         <router-link
           class="button-link settings-page__element"
-          :class="{ 'button-link--disabled': !!routeStore.path }"
+          :class="{ 'button-link--disabled': isLoading || !!routeStore.path }"
           to="/settings/edit?target=radius"
         >
           <MdiMapMarkerRadiusIcon />
@@ -33,21 +37,11 @@
       <li>
         <router-link
           class="button-link settings-page__element"
-          :class="{ 'button-link--disabled': !!routeStore.path }"
+          :class="{ 'button-link--disabled': isLoading || !!routeStore.path }"
           to="/onboarding"
         >
           <MdiSchoolIcon />
           <span class="settings-page__element-text">{{ $t('settings.onboarding.title') }}</span>
-          <MdiChevronRightIcon />
-        </router-link>
-      </li>
-      <li v-if="isDebugButtonVisible">
-        <router-link
-          class="button-link settings-page__element"
-          to="/debug"
-        >
-          <MdiCogIcon />
-          <span class="settings-page__element-text">Debug</span>
           <MdiChevronRightIcon />
         </router-link>
       </li>
@@ -64,15 +58,14 @@
         </ButtonTransitionIcon>
       </li>
     </ul>
-    <button class="version" @click="versionClicks++">
+    <span class="version">
       {{ VITE_APP_VERSION }} ({{ VITE_GIT_COMMIT_SHA }})
-    </button>
+    </span>
   </section>
 </template>
 
 <script setup lang="ts">
-import { whenever } from '@vueuse/core'
-import { defineAsyncComponent, ref } from 'vue'
+import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { toast } from 'vue-sonner'
@@ -86,29 +79,36 @@ import ButtonTransitionIcon from '@/components/ButtonTransitionIcon.vue'
 import { useRouteStore } from '@/stores/route'
 import { useUserStore } from '@/stores/user'
 
-definePage({ meta: { title: 'settings.title' } })
-
-const MdiCogIcon = defineAsyncComponent(() => import('~icons/mdi/cog'))
+definePage({ meta: { title: 'settings.title', displayTitle: true } })
 
 const { VITE_APP_VERSION, VITE_GIT_COMMIT_SHA } = import.meta.env
 const { t } = useI18n()
 const userStore = useUserStore()
 const routeStore = useRouteStore()
 const router = useRouter()
-async function signOut() {
-  if (routeStore.state) {
-    await routeStore.finishRoute(routeStore.state.id)
-  }
-  await userStore.signOut()
-  toast.success(t('settings.signOut.signOutFromAccount'))
-  router.push('/')
-}
 
-const versionClicks = ref<number>(0)
-const isDebugButtonVisible = ref<boolean>(false)
-whenever(() => versionClicks.value === 10, () => {
-  isDebugButtonVisible.value = true
-})
+const isLoading = ref<boolean>(false)
+async function signOut(): Promise<void> {
+  isLoading.value = true
+  try {
+    if (routeStore.state) {
+      await routeStore.finishRoute(routeStore.state.id)
+    }
+  }
+  finally {
+    try {
+      await userStore.signOut()
+      toast.success(t('settings.signOut.notifications.signOutFromAccountSuccess'))
+      router.push('/')
+    }
+    catch {
+      toast.error(t('settings.signOut.notifications.signOutFromAccountError'))
+    }
+    finally {
+      isLoading.value = false
+    }
+  }
+}
 </script>
 
 <style>
@@ -143,6 +143,7 @@ whenever(() => versionClicks.value === 10, () => {
   }
   .version {
     font-size: 0.8rem;
+    text-align: center;
   }
 }
 </style>

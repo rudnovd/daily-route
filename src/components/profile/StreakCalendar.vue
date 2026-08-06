@@ -101,7 +101,8 @@ function composeStreakDateClass(streakDate: StreakCalendarDate) {
       font-size: 0.8rem;
     }
     &.streak-calendar__date--not-completed {
-      .streak-calendar__day, .streak-calendar__month {
+      .streak-calendar__day,
+      .streak-calendar__month {
         opacity: 0.2;
       }
     }

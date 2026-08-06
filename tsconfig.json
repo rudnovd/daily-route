@@ -2,7 +2,9 @@
   "compilerOptions": {
     "target": "esnext",
     "lib": ["esnext", "DOM"],
+    "rootDir": ".",
     "moduleResolution": "bundler",
+    "paths": { "@/*": ["./src/*"] },
     "resolveJsonModule": true,
     "types": ["unplugin-icons/types/vue"],
     "importHelpers": true,
@@ -10,9 +12,7 @@
     "removeComments": true,
     "sourceMap": true,
     "verbatimModuleSyntax": true,
-    "skipLibCheck": true,
-    "paths": { "@/*": ["./src/*"] },
-    "rootDir": "."
+    "skipLibCheck": true
   },
   "vueCompilerOptions": {
     "plugins": [

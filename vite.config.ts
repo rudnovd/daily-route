@@ -20,18 +20,7 @@ export default defineConfig(() => ({
     alias: {
       '@': fileURLToPath(new URL('src', import.meta.url)),
     },
-    extensions: [
-      '.js',
-      '.json',
-      '.jsx',
-      '.mjs',
-      '.ts',
-      '.tsx',
-      '.vue',
-    ],
   },
-  // prevent Vite from obscuring rust errors
-  clearScreen: false,
   define: {
     'import.meta.env.VITE_GIT_COMMIT_SHA': JSON.stringify(commitSha),
     'import.meta.env.VITE_APP_VERSION': JSON.stringify(packageJson.version),
@@ -40,15 +29,8 @@ export default defineConfig(() => ({
     port: 1420,
     strictPort: true,
     host: host || false,
-    hmr: host
-      ? {
-          protocol: 'ws',
-          host,
-          port: 1421,
-        }
-      : undefined,
-    watch: {
-      ignored: ['**/src-tauri/**'],
-    },
+    hmr: host ? { protocol: 'ws', host, port: 1421 } : undefined,
+    watch: { ignored: ['**/src-tauri/**'] },
   },
+  clearScreen: false, // prevent Vite from obscuring rust errors
 }))

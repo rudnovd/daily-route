@@ -27,9 +27,9 @@
   },
   "settings": {
     "title": "Settings",
-    "language": {
+    "locale": {
       "title": "Language",
-      "selectLanguage": "Select language"
+      "selectLocale": "Select language"
     },
     "startPoint": {
       "title": "Start Point",
@@ -51,7 +51,10 @@
     },
     "signOut": {
       "title": "Sign out",
-      "signOutFromAccount": "You have sign out of your account"
+      "notifications": {
+        "signOutFromAccountSuccess": "You have sign out of your account",
+        "signOutFromAccountError": "Failed to sign out of your account"
+      }
     }
   },
   "profile": {
@@ -72,6 +75,7 @@
     }
   },
   "onboarding": {
+    "title": "Onboarding",
     "buttons": {
       "start": "Start",
       "next": "Next",
@@ -91,5 +95,11 @@
       { "description": "Save the radius" },
       { "description": "When you’re ready to start your route, press and hold the ‘Start daily route’ button. You can only complete the daily route once a day." }
     ]
+  },
+  "notFound": {
+    "index": "Page not found",
+    "buttons": {
+      "backToHome": "Back to home"
+    }
   }
 }

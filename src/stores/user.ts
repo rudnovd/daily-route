@@ -158,7 +158,6 @@ export const useUserStore = defineStore('user', {
     },
     async changeLocale(locale: Locale) {
       this.settings.locale = locale
-      setLocale(locale)
     },
     async getDaysStreak(): Promise<number> {
       const count = await getRoutesStreak()
