@@ -27,9 +27,9 @@
   },
   "settings": {
     "title": "Настройки",
-    "language": {
+    "locale": {
       "title": "Язык",
-      "selectLanguage": "Выберите язык"
+      "selectLocale": "Выберите язык"
     },
     "startPoint": {
       "title": "Стартовая точка",

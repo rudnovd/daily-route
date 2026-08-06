@@ -5,10 +5,10 @@
         <router-link
           class="button-link settings-page__element"
           :class="{ 'button-link--disabled': isLoading }"
-          to="/settings/language"
+          to="/settings/locale"
         >
           <MdiTranslateIcon />
-          <span class="settings-page__element-text">{{ $t('settings.language.title') }}</span>
+          <span class="settings-page__element-text">{{ $t('settings.locale.title') }}</span>
           <MdiChevronRightIcon />
         </router-link>
       </li>

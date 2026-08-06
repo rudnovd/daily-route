@@ -73,9 +73,9 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/settings/language': RouteRecordInfo<
-      '/settings/language',
-      '/settings/language',
+    '/settings/locale': RouteRecordInfo<
+      '/settings/locale',
+      '/settings/locale',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -141,9 +141,9 @@ declare module 'vue-router/auto-routes' {
       pathParamNames:
         | never
     }
-    'src/pages/settings/language.vue': {
+    'src/pages/settings/locale.vue': {
       routes:
-        | '/settings/language'
+        | '/settings/locale'
       views:
         | never
       pathParamNames:

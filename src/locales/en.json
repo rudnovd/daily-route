@@ -27,9 +27,9 @@
   },
   "settings": {
     "title": "Settings",
-    "language": {
+    "locale": {
       "title": "Language",
-      "selectLanguage": "Select language"
+      "selectLocale": "Select language"
     },
     "startPoint": {
       "title": "Start Point",
