@@ -69,7 +69,8 @@ const userStore = useUserStore()
         border: 1px solid var(--color-text);
         opacity: 1;
       }
-      svg, img {
+      svg,
+      img {
         width: 1.5em;
         height: 1.5em;
       }

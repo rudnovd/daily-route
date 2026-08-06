@@ -120,7 +120,7 @@ function emitTransitionEnd() {
       width: 0;
     }
   }
-   .walk-enter-to {
+  .walk-enter-to {
     &.transition-container__element {
       grid-template-columns: calc(100% - var(--size)) 0 var(--size);
     }
@@ -136,5 +136,5 @@ function emitTransitionEnd() {
       width: 0;
     }
   }
- }
+}
 </style>

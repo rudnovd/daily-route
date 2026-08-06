@@ -121,12 +121,12 @@ whenever(() => userStore.isAuthenticated, () => {
 @import url('./assets/styles/root.css');
 @import url('./assets/styles/buttons.css');
 @import url('./assets/styles/notification.css');
-.navigation-header+hr {
+.navigation-header + hr {
   margin-block: var(--header-horizontal-rule-margin-block);
   border-width: var(--header-horizontal-rule-border-width);
   opacity: 0.6;
 }
-.navigation-header+hr+main {
+.navigation-header + hr + main {
   height: calc(100% - var(--header-height) - var(--navbar-height) - var(--navbar-position-bottom));
   padding-top: 0;
 }

@@ -13,8 +13,8 @@
   /* Primary */
   --color-primary: oklch(54.61% 0.2152 262.88deg);
   --color-primary-hover: oklch(48.82% 0.2172 264.38deg);
-  --color-primary-active: oklch(41.4% 0.2190 265.20deg);
-  --color-primary-disabled: oklch(76% 0.090 263deg);
+  --color-primary-active: oklch(41.4% 0.219 265.2deg);
+  --color-primary-disabled: oklch(76% 0.09 263deg);
 
   /* Accent */
   --color-accent: oklch(86.52% 0.1768 90.38deg);
@@ -23,19 +23,19 @@
   --color-accent-disabled: oklch(92.43% 0.1151 95.75deg);
 
   /* Success */
-  --color-success: oklch(72.27% 0.1920 149.58deg);
-  --color-success-hover: oklch(64.5% 0.1880 149.60deg);
-  --color-success-active: oklch(56.5% 0.1840 149.60deg);
+  --color-success: oklch(72.27% 0.192 149.58deg);
+  --color-success-hover: oklch(64.5% 0.188 149.6deg);
+  --color-success-active: oklch(56.5% 0.184 149.6deg);
 
   /* Warning */
   --color-warning: oklch(76.86% 0.1647 70.08deg);
-  --color-warning-hover: oklch(68.5% 0.1620 70.00deg);
-  --color-warning-active: oklch(60.5% 0.1580 70.00deg);
+  --color-warning-hover: oklch(68.5% 0.162 70deg);
+  --color-warning-active: oklch(60.5% 0.158 70deg);
 
   /* Error */
   --color-error: oklch(63.68% 0.2078 25.33deg);
   --color-error-hover: oklch(57.71% 0.2152 27.33deg);
-  --color-error-active: oklch(51.5% 0.2160 27.30deg);
+  --color-error-active: oklch(51.5% 0.216 27.3deg);
   @media (prefers-color-scheme: light) {
     /* Typography */
     --color-text: oklch(21.01% 0.0318 264.66deg);
@@ -69,10 +69,8 @@
   --header-horizontal-rule-margin-block: 0.5rem;
   --header-horizontal-rule-border-width: 1px;
   --header-height: calc(
-    var(--navigation-header-padding-top) +
-    var(--navigation-header-height) +
-    calc(var(--header-horizontal-rule-margin-block) * 2) +
-    calc(var(--header-horizontal-rule-border-width) * 2)
+    var(--navigation-header-padding-top) + var(--navigation-header-height) +
+      calc(var(--header-horizontal-rule-margin-block) * 2) + calc(var(--header-horizontal-rule-border-width) * 2)
   );
   --navbar-height: 4rem;
   --navbar-position-bottom: 64px;

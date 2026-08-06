@@ -2,7 +2,7 @@ name: Build android apk
 
 on:
   workflow_run:
-    workflows: ["Release"]
+    workflows: [Release]
     types:
       - completed
 
@@ -10,7 +10,7 @@ jobs:
   build-android:
     permissions:
       contents: write
-    runs-on: 'ubuntu-latest'
+    runs-on: ubuntu-latest
     environment: production
     env:
       VITE_MAPTILER_API_KEY: ${{ vars.VITE_MAPTILER_API_KEY }}
@@ -43,7 +43,7 @@ jobs:
         uses: actions/setup-java@main
         with:
           java-version: '21'
-          distribution: 'temurin'
+          distribution: temurin
       - name: Setup Android SDK
         uses: android-actions/setup-android@v4
       - name: Setup Android NDK
@@ -68,7 +68,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tagName: v__VERSION__
-          releaseName: 'v__VERSION__'
+          releaseName: v__VERSION__
           releaseDraft: true
-          args: '--apk'
-          mobile: 'android'
+          args: --apk
+          mobile: android

@@ -12,7 +12,7 @@
     "preview": "vite preview",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
-    "lint:css": "stylelint **/*{.css,.vue}",
+    "lint:css": "stylelint src/**/*{.css,.vue}",
     "lint:css:fix": "npm run lint:css -- --fix",
     "tauri:android:dev": "tauri android dev",
     "tauri:android:build": "tauri android build --apk",

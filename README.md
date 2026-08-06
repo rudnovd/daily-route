@@ -9,4 +9,5 @@ Take a daily walk to a random destination within your chosen radius.
 </picture>
 
 ## License
+
 This project is licensed under the [MIT](./LICENSE.md).

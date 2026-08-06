@@ -234,7 +234,8 @@ watch(() => routeStore.status, (newStatus) => {
     overflow: auto;
     scrollbar-width: thin;
   }
-  .route, .route > div {
+  .route,
+  .route > div {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -271,7 +272,7 @@ watch(() => routeStore.status, (newStatus) => {
     }
   }
   .route__far-from-start-placeholder {
-     text-align: center;
+    text-align: center;
     .walk-container {
       display: grid;
       grid-template-columns: auto 1fr auto;
