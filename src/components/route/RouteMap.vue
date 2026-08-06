@@ -141,9 +141,6 @@ watch(position, async ({ coords: { longitude, latitude } }) => {
   if (!isReady.value) {
     return
   }
-  if (import.meta.env.DEV) {
-    toast.info(`${longitude}, ${latitude}`, { position: 'top-center' })
-  }
   updateGeolocationPoint([longitude, latitude])
   if (routeStore.status !== 'started' || !routeStore.path?.features.length) {
     return
