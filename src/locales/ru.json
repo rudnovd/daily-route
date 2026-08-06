@@ -51,7 +51,10 @@
     },
     "signOut": {
       "title": "Выйти",
-      "signOutFromAccount": "Вы вышли из своей учетной записи"
+      "notifications": {
+        "signOutFromAccountSuccess": "Вы вышли из своей учетной записи",
+        "signOutFromAccountError": "Ошибка при выходе из учетной записи"
+      }
     }
   },
   "profile": {

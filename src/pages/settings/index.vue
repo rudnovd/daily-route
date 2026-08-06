@@ -2,7 +2,11 @@
   <section class="settings-page">
     <ul>
       <li>
-        <router-link class="button-link settings-page__element" to="/settings/language">
+        <router-link
+          class="button-link settings-page__element"
+          :class="{ 'button-link--disabled': isLoading }"
+          to="/settings/language"
+        >
           <MdiTranslateIcon />
           <span class="settings-page__element-text">{{ $t('settings.language.title') }}</span>
           <MdiChevronRightIcon />
@@ -11,7 +15,7 @@
       <li>
         <router-link
           class="button-link settings-page__element"
-          :class="{ 'button-link--disabled': !!routeStore.path }"
+          :class="{ 'button-link--disabled': isLoading || !!routeStore.path }"
           to="/settings/edit?target=start"
         >
           <MdiMapMarkerIcon />
@@ -22,7 +26,7 @@
       <li>
         <router-link
           class="button-link settings-page__element"
-          :class="{ 'button-link--disabled': !!routeStore.path }"
+          :class="{ 'button-link--disabled': isLoading || !!routeStore.path }"
           to="/settings/edit?target=radius"
         >
           <MdiMapMarkerRadiusIcon />
@@ -33,7 +37,7 @@
       <li>
         <router-link
           class="button-link settings-page__element"
-          :class="{ 'button-link--disabled': !!routeStore.path }"
+          :class="{ 'button-link--disabled': isLoading || !!routeStore.path }"
           to="/onboarding"
         >
           <MdiSchoolIcon />
@@ -61,7 +65,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent } from 'vue'
+import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { toast } from 'vue-sonner'
@@ -82,13 +86,28 @@ const { t } = useI18n()
 const userStore = useUserStore()
 const routeStore = useRouteStore()
 const router = useRouter()
-async function signOut() {
-  if (routeStore.state) {
-    await routeStore.finishRoute(routeStore.state.id)
+
+const isLoading = ref<boolean>(false)
+async function signOut(): Promise<void> {
+  isLoading.value = true
+  try {
+    if (routeStore.state) {
+      await routeStore.finishRoute(routeStore.state.id)
+    }
   }
-  await userStore.signOut()
-  toast.success(t('settings.signOut.signOutFromAccount'))
-  router.push('/')
+  finally {
+    try {
+      await userStore.signOut()
+      toast.success(t('settings.signOut.notifications.signOutFromAccountSuccess'))
+      router.push('/')
+    }
+    catch {
+      toast.error(t('settings.signOut.notifications.signOutFromAccountError'))
+    }
+    finally {
+      isLoading.value = false
+    }
+  }
 }
 </script>
 
