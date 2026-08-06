@@ -41,16 +41,6 @@
           <MdiChevronRightIcon />
         </router-link>
       </li>
-      <li v-if="isDebugButtonVisible">
-        <router-link
-          class="button-link settings-page__element"
-          to="/debug"
-        >
-          <MdiCogIcon />
-          <span class="settings-page__element-text">Debug</span>
-          <MdiChevronRightIcon />
-        </router-link>
-      </li>
       <li v-if="userStore.user">
         <ButtonTransitionIcon
           size="0.8em"
@@ -64,15 +54,14 @@
         </ButtonTransitionIcon>
       </li>
     </ul>
-    <button class="version" @click="versionClicks++">
+    <span class="version">
       {{ VITE_APP_VERSION }} ({{ VITE_GIT_COMMIT_SHA }})
-    </button>
+    </span>
   </section>
 </template>
 
 <script setup lang="ts">
-import { whenever } from '@vueuse/core'
-import { defineAsyncComponent, ref } from 'vue'
+import { defineAsyncComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { toast } from 'vue-sonner'
@@ -88,8 +77,6 @@ import { useUserStore } from '@/stores/user'
 
 definePage({ meta: { title: 'settings.title' } })
 
-const MdiCogIcon = defineAsyncComponent(() => import('~icons/mdi/cog'))
-
 const { VITE_APP_VERSION, VITE_GIT_COMMIT_SHA } = import.meta.env
 const { t } = useI18n()
 const userStore = useUserStore()
@@ -103,12 +90,6 @@ async function signOut() {
   toast.success(t('settings.signOut.signOutFromAccount'))
   router.push('/')
 }
-
-const versionClicks = ref<number>(0)
-const isDebugButtonVisible = ref<boolean>(false)
-whenever(() => versionClicks.value === 10, () => {
-  isDebugButtonVisible.value = true
-})
 </script>
 
 <style>
@@ -143,6 +124,7 @@ whenever(() => versionClicks.value === 10, () => {
   }
   .version {
     font-size: 0.8rem;
+    text-align: center;
   }
 }
 </style>
