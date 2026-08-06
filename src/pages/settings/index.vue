@@ -79,7 +79,7 @@ import ButtonTransitionIcon from '@/components/ButtonTransitionIcon.vue'
 import { useRouteStore } from '@/stores/route'
 import { useUserStore } from '@/stores/user'
 
-definePage({ meta: { title: 'settings.title' } })
+definePage({ meta: { title: 'settings.title', displayTitle: true } })
 
 const { VITE_APP_VERSION, VITE_GIT_COMMIT_SHA } = import.meta.env
 const { t } = useI18n()

@@ -43,7 +43,7 @@ import { useUserStore } from '@/stores/user'
 import { supabase } from '@/supabase'
 
 definePage({
-  meta: { title: 'profile.title' },
+  meta: { title: 'profile.title', displayTitle: true },
   beforeEnter() {
     const userStore = useUserStore()
     if (!userStore.isAuthenticated) {

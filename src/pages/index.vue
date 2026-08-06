@@ -100,7 +100,7 @@ import { useStopwatch } from '@/composables/useStopwatch'
 import { useRouteStore } from '@/stores/route'
 import { useUserStore } from '@/stores/user'
 
-definePage({ meta: { hideTopPadding: true } })
+definePage({ meta: { title: 'index.title', hideTopPadding: true } })
 
 const MdiCheckBoldIcon = defineAsyncComponent(() => import('~icons/mdi/check-bold'))
 const MdiCloseThickIcon = defineAsyncComponent(() => import('~icons/mdi/close-thick'))

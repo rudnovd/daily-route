@@ -42,7 +42,7 @@ import { useMap } from '@/composables/useMap'
 import { IS_ONBOARDING_FINISHED_KEY } from '@/constants/onboarding'
 import { useUserStore } from '@/stores/user'
 
-definePage({ meta: { title: 'settings.startPoint.title' } })
+definePage({ meta: { title: 'settings.startPoint.title', displayTitle: true } })
 
 const router = useRouter()
 const target = computed<'start' | 'radius' | null>(() => {

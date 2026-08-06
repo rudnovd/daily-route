@@ -75,6 +75,7 @@
     }
   },
   "onboarding": {
+    "title": "Onboarding",
     "buttons": {
       "start": "Start",
       "next": "Next",

@@ -20,7 +20,7 @@
 <script setup lang="ts">
 import { useOnboarding } from '@/composables/useOnboarding'
 
-definePage({ meta: { isNavbarHidden: true } })
+definePage({ meta: { title: 'onboarding.title', isNavbarHidden: true } })
 
 const onboarding = useOnboarding()
 </script>
