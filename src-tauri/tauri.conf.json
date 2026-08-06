@@ -1,7 +1,7 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "Daily Route",
-  "version": "0.1.0",
+  "version": "../package.json",
   "identifier": "com.dailyroute.app",
   "build": {
     "frontendDist": "../dist",
@@ -24,7 +24,7 @@
   },
   "bundle": {
     "android": {
-     	"autoIncrementVersionCode": false,
+      "autoIncrementVersionCode": false,
      	"minSdkVersion": 28
     },
     "category": "HealthcareAndFitness",
