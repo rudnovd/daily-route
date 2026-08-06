@@ -95,5 +95,11 @@
       { "description": "Save the radius" },
       { "description": "When you’re ready to start your route, press and hold the ‘Start daily route’ button. You can only complete the daily route once a day." }
     ]
+  },
+  "notFound": {
+    "index": "Page not found",
+    "buttons": {
+      "backToHome": "Back to home"
+    }
   }
 }
