@@ -27,5 +27,3 @@ shellEmulator: true
 trustPolicy: no-downgrade
 onlyBuiltDependencies:
   - supabase
-allowBuilds:
-  '@project-osrm/osrm': true
