@@ -1,11 +1,18 @@
 {
+  "$schema": "https://json.schemastore.org/web-manifest-combined.json",
+  "id": "dailyrouteapp",
   "name": "Daily Route",
   "short_name": "Daily Route",
-  "description": "App for daily walks",
+  "description": "Take a daily walk to a random destination within your chosen radius",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f8f8f5",
   "theme_color": "#ffcc00",
+  "lang": "en",
+  "categories": ["health & fitness"],
+  "color_scheme_dark": {
+    "background_color": "#0f1115"
+  },
   "icons": [
     { "src": "/icon-192.png", "type": "image/png", "sizes": "192x192" },
     { "src": "/icon-512-maskable.png", "type": "image/png", "sizes": "512x512", "purpose": "maskable" },
