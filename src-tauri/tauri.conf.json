@@ -3,6 +3,7 @@
   "productName": "Daily Route",
   "version": "../package.json",
   "identifier": "com.dailyroute.app",
+  "mainBinaryName": "dailyroute",
   "build": {
     "frontendDist": "../dist",
     "devUrl": "http://localhost:1420",
