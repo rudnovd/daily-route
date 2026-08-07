@@ -1,28 +1,4 @@
-minimumReleaseAgeExclude:
-  - '@supabase/auth-js@2.110.1 || 2.110.3 || 2.110.9 || 2.111.0'
-  - '@supabase/functions-js@2.110.1 || 2.110.3 || 2.110.9 || 2.111.0'
-  - '@supabase/postgrest-js@2.110.1 || 2.110.3 || 2.110.9 || 2.111.0'
-  - '@supabase/realtime-js@2.110.1 || 2.110.3 || 2.110.9 || 2.111.0'
-  - '@supabase/storage-js@2.110.1 || 2.110.3 || 2.110.9 || 2.111.0'
-  - '@supabase/supabase-js@2.110.1 || 2.110.3 || 2.110.9 || 2.111.0'
-  - '@vue/language-core@3.3.7 || 3.3.8'
-  - vue-tsc@3.3.7 || 3.3.8
-  - '@antfu/eslint-config@9.2.0'
-  - '@supabase/cli-darwin-arm64@2.110.0'
-  - '@supabase/cli-darwin-x64@2.110.0'
-  - '@supabase/cli-linux-arm64-musl@2.110.0'
-  - '@supabase/cli-linux-arm64@2.110.0'
-  - '@supabase/cli-linux-x64-musl@2.110.0'
-  - '@supabase/cli-linux-x64@2.110.0'
-  - '@supabase/cli-windows-arm64@2.110.0'
-  - '@supabase/cli-windows-x64@2.110.0'
-  - supabase@2.110.0
-  - temporal-polyfill@1.0.2
-  - temporal-spec@1.0.1
-  - '@vueuse/core@14.4.0'
-  - '@vueuse/metadata@14.4.0'
-  - '@vueuse/shared@14.4.0'
-  - '@maptiler/sdk@4.1.0'
+minimumReleaseAge: 10080
 shellEmulator: true
 trustPolicy: no-downgrade
 onlyBuiltDependencies:

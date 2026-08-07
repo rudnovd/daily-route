@@ -27,6 +27,7 @@
   },
   "settings": {
     "title": "Настройки",
+    "androidApp": "Приложение для Android",
     "locale": {
       "title": "Язык",
       "selectLocale": "Выберите язык"

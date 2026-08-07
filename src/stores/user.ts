@@ -6,7 +6,7 @@ import { openUrl } from '@tauri-apps/plugin-opener'
 import { useLocalStorage, useOnline } from '@vueuse/core'
 import { defineStore } from 'pinia'
 import { getRoutesStreak } from '@/api/userRoute'
-import { getAppLocale, setLocale } from '@/i18n'
+import { getAppLocale } from '@/i18n'
 import { supabase } from '@/supabase'
 
 interface UserSettings {

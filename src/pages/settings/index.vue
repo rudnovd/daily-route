@@ -58,9 +58,18 @@
         </ButtonTransitionIcon>
       </li>
     </ul>
-    <span class="version">
-      {{ VITE_APP_VERSION }} ({{ VITE_GIT_COMMIT_SHA }})
-    </span>
+    <div class="settings-page__footer">
+      <a
+        v-if="!VITE_IS_TAURI"
+        class="color-accent"
+        :href="`https://github.com/rudnovd/daily-route/releases/tag/v${VITE_APP_VERSION}`"
+      >
+        {{ $t('settings.androidApp') }}
+      </a>
+      <span class="version">
+        {{ VITE_APP_VERSION }} ({{ VITE_GIT_COMMIT_SHA }})
+      </span>
+    </div>
   </section>
 </template>
 
@@ -81,7 +90,7 @@ import { useUserStore } from '@/stores/user'
 
 definePage({ meta: { title: 'settings.title', displayTitle: true } })
 
-const { VITE_APP_VERSION, VITE_GIT_COMMIT_SHA } = import.meta.env
+const { VITE_APP_VERSION, VITE_GIT_COMMIT_SHA, VITE_IS_TAURI } = import.meta.env
 const { t } = useI18n()
 const userStore = useUserStore()
 const routeStore = useRouteStore()
@@ -141,9 +150,18 @@ async function signOut(): Promise<void> {
       }
     }
   }
-  .version {
-    font-size: 0.8rem;
-    text-align: center;
+  .settings-page__footer {
+    display: grid;
+    gap: 0.5rem;
+    justify-content: center;
+    a {
+      font-weight: 700;
+      text-decoration: underline;
+    }
+    .version {
+      font-size: 0.8rem;
+      text-align: center;
+    }
   }
 }
 </style>

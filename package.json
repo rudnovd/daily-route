@@ -4,9 +4,15 @@
   "version": "0.2.0",
   "private": true,
   "packageManager": "pnpm@11.20.0",
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "^24",
+      "onFail": "download"
+    }
+  },
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "postinstall": "eslint --fix pnpm-workspace.yaml",
     "start": "vite",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
@@ -34,7 +40,7 @@
     "geojson": "^0.5.0",
     "ky": "^2.0.2",
     "pinia": "^3.0.4",
-    "supabase": "^2.110.0",
+    "supabase": "^2.111.0",
     "temporal-polyfill": "^1.0.2",
     "vue": "^3.5.40",
     "vue-i18n": "^11.4.8",
@@ -61,7 +67,7 @@
     "stylelint-rem-over-px": "^2.0.0",
     "typescript": "~6.0.3",
     "unplugin-icons": "^23.0.1",
-    "vite": "^8.1.5",
-    "vue-tsc": "^3.3.8"
+    "vite": "^8.2.0",
+    "vue-tsc": "^3.3.9"
   }
 }
