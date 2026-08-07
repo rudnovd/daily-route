@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.3.0](https://github.com/rudnovd/daily-route/compare/v0.2.0...v0.3.0) (2026-08-07)
+
+
+### Features
+
+* **settings-page:** add link to android app ([e6e8521](https://github.com/rudnovd/daily-route/commit/e6e85218a1a888ffcaa8dad3aeb1fb6d23035f70))
+
+
+### Bug Fixes
+
+* **locale-page:** replace to location.origin instead location.href ([13e72fd](https://github.com/rudnovd/daily-route/commit/13e72fde75b74151a4c5d676d868e5e4ef68e1b1))
+
 ## [0.2.0](https://github.com/rudnovd/daily-route/compare/v0.1.0...v0.2.0) (2026-08-06)
 
 
