@@ -27,6 +27,7 @@
   },
   "settings": {
     "title": "Settings",
+    "androidApp": "Android app",
     "locale": {
       "title": "Language",
       "selectLocale": "Select language"
