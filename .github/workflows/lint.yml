@@ -1,0 +1,27 @@
+name: lint
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: install pnpm
+        uses: pnpm/setup@v2
+        with:
+          cache: true
+
+      - name: run eslint
+        run: pnpm run lint
+
+      - name: run stylelint
+        run: pnpm run lint:css
+
+      - name: run build
+        run: pnpm run build
