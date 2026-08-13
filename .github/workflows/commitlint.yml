@@ -1,0 +1,28 @@
+name: lint commit
+
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  commitlint:
+    if: github.event_name != 'push' || github.event.forced == false
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+
+      - name: install pnpm
+        uses: pnpm/setup@v2
+        with:
+          cache: true
+
+      - name: validate commits
+        if: github.event_name == 'push'
+        run: pnpx commitlint --from ${{ github.event.before }} --to ${{ github.event.after }} --verbose
+
+      - name: validate pull request commits
+        if: github.event_name == 'pull_request'
+        run: pnpx commitlint --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }} --verbose
