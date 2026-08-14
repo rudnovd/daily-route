@@ -3,6 +3,7 @@
     <div class="setting-edit-page__map">
       <div v-if="isReady" class="map__top-container">
         <button
+          v-wave
           class="icon-button icon-button--medium button-primary"
           @click="moveMapToUserGeolocation"
         >
@@ -19,7 +20,7 @@
           {{ $t('settings.radius.meters') }}
         </div>
       </template>
-      <button class="button-primary" data-onboarding-element="save-target-button" @click="saveTarget">
+      <button v-wave class="button-primary" data-onboarding-element="save-target-button" @click="saveTarget">
         {{ target === 'start' ? $t('settings.startPoint.buttons.saveStart') : $t('settings.radius.buttons.saveRadius') }}
       </button>
     </div>

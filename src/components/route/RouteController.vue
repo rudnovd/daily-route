@@ -12,6 +12,7 @@
     </div>
     <div v-if="routeStore.status === 'started'">
       <button
+        v-wave
         :disabled="isLoading || !userStore.isOnline"
         class="icon-button icon-button--large button-primary"
         @click="pauseRoute"
@@ -22,6 +23,7 @@
     </div>
     <div v-else-if="routeStore.status === 'paused'">
       <button
+        v-wave
         :disabled="isLoading || !userStore.isOnline"
         class="icon-button icon-button--large button-primary"
         @click="unpauseRoute"

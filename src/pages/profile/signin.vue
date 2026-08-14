@@ -1,6 +1,7 @@
 <template>
   <section class="signin-page">
     <button
+      v-wave
       class="button-primary"
       :disabled="isLoading || !userStore.isOnline"
       @click="signIn('google')"
@@ -8,6 +9,7 @@
       {{ $t('profile.signIn.buttons.signInWithGoogle') }}
     </button>
     <button
+      v-wave
       class="button-primary"
       :disabled="isLoading || !userStore.isOnline"
       @click="signIn('anonymously')"

@@ -15,6 +15,7 @@
       </figure>
       <button
         v-if="userStore.user?.is_anonymous"
+        v-wave
         class="button-primary"
         :disabled="isLoading || !!routeStore.path || !userStore.isOnline"
         @click="linkAccountToGoogle"

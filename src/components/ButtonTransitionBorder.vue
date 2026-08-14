@@ -1,6 +1,7 @@
 <template>
   <button
     ref="buttonElement"
+    v-wave
     class="button-transition-border"
     @pointerdown="startTransition"
     @pointerup="stopTransition"

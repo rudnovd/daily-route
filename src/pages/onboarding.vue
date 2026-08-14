@@ -11,7 +11,7 @@
     </i18n-t>
     <p>{{ $t('onboarding.description[1]') }}</p>
     <p>{{ $t('onboarding.description[2]') }}!</p>
-    <button class="button-primary" @click="onboarding.start()">
+    <button v-wave class="button-primary" @click="onboarding.start()">
       {{ $t('onboarding.buttons.start') }}
     </button>
   </section>

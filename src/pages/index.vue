@@ -10,13 +10,13 @@
       </WalkerLoading>
       <div v-else-if="!userStore.dailyRouteStartPosition" class="route__placeholder">
         <span>{{ $t('index.startNotSet') }}</span>
-        <router-link class="button-link button-primary" to="/settings/edit?target=start">
+        <router-link v-wave class="button-link button-primary" to="/settings/edit?target=start">
           {{ $t('index.setStart') }}
         </router-link>
       </div>
       <div v-else-if="!userStore.radiusBbox" class="route__placeholder">
         <span>{{ $t('index.radiusNotSet') }}</span>
-        <router-link class="button-primary button-link" to="/settings/edit?target=radius">
+        <router-link v-wave class="button-primary button-link" to="/settings/edit?target=radius">
           {{ $t('index.setRadius') }}
         </router-link>
       </div>

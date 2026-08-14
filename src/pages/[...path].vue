@@ -2,7 +2,7 @@
   <section class="not-found-page">
     <MdiMapMarkerOffOutlineIcon />
     <span>{{ $t('notFound.index') }}</span>
-    <router-link to="/" class="button-link button-primary">
+    <router-link v-wave to="/" class="button-link button-primary">
       {{ $t('notFound.buttons.backToHome') }}
     </router-link>
   </section>

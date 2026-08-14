@@ -1,4 +1,5 @@
 import { createPinia } from 'pinia'
+import VWave from 'v-wave'
 import { createApp } from 'vue'
 import App from './App.vue'
 import { IS_ONBOARDING_FINISHED_KEY, ONBOARDING_STEP_KEY } from './constants/onboarding'
@@ -25,5 +26,6 @@ setLocale(getAppLocale()).then(async () => {
   if (!isOnboardingFinished && !hasStartedOnboarding) {
     router.push('/onboarding')
   }
+  app.use(VWave, { initialOpacity: 0.5, easing: 'ease-in' })
   app.use(i18n).mount('#app')
 })

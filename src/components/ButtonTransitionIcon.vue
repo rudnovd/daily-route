@@ -17,6 +17,7 @@
       </Transition>
     </div>
     <button
+      v-wave
       v-bind="$attrs"
       @pointerdown="startButtonTransition"
       @pointerup="stopButtonTransition"
