@@ -269,6 +269,13 @@ defineExpose({ isReady })
     color: var(--color-accent);
     span {
       -webkit-text-stroke: 1px rgb(0 0 0 / 9.5%);
+  .maplibregl-ctrl.maplibregl-ctrl-attrib,
+  .maplibregl-ctrl-top-right {
+    font-size: 0.5rem;
+    background-color: transparent;
+    opacity: 0.5;
+    a {
+      color: var(--color-text);
     }
   }
 }
