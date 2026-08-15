@@ -26,6 +26,6 @@ setLocale(getAppLocale()).then(async () => {
   if (!isOnboardingFinished && !hasStartedOnboarding) {
     router.push('/onboarding')
   }
-  app.use(VWave, { initialOpacity: 0.5, easing: 'ease-in' })
+  app.use(VWave, { initialOpacity: 0.5, easing: 'ease-in', waitForRelease: false })
   app.use(i18n).mount('#app')
 })
