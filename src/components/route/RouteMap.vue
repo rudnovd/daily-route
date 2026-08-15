@@ -8,14 +8,28 @@
       >
         <component :is="userStore.settings.isRoutePathVisible ? MdiEyeIcon : MdiEyeOffIcon" />
       </button>
-      <button class="icon-button icon-button--medium button-primary geolocation-button" @click="moveMapToUserGeolocation">
-        <MdiNavigation />
-      </button>
     </header>
     <div ref="mapElement" class="route-map__element" />
-    <div v-if="userStore.daysStreak" class="route-map__bottom-container">
-      <MdiFireIcon />
-      <span class="tabular-num">{{ userStore.daysStreak }}</span>
+    <div v-if="isReady" class="route-map__bottom-container">
+      <div class="bottom-container__left-side">
+        <div v-if="routeStore.daysStreak">
+          <MdiFireIcon />
+          <span class="tabular-num">{{ routeStore.daysStreak }}</span>
+        </div>
+      </div>
+      <div class="bottom-container__right-side">
+        <div>
+          <button v-wave class="icon-button icon-button--medium button-primary" @click="map?.zoomIn()">
+            <MdiPlusIcon />
+          </button>
+          <button v-wave class="icon-button icon-button--medium button-primary" @click="map?.zoomOut()">
+            <MdiMinusIcon />
+          </button>
+        </div>
+        <button v-wave class="icon-button icon-button--medium button-primary geolocation-button" @click="moveMapToUserGeolocation">
+          <MdiNavigation />
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -30,7 +44,9 @@ import { onActivated, onDeactivated, useTemplateRef, watch } from 'vue'
 import MdiEyeIcon from '~icons/mdi/eye'
 import MdiEyeOffIcon from '~icons/mdi/eye-off'
 import MdiFireIcon from '~icons/mdi/fire'
+import MdiMinusIcon from '~icons/mdi/minus'
 import MdiNavigation from '~icons/mdi/navigation'
+import MdiPlusIcon from '~icons/mdi/plus'
 import { useGeolocation } from '@/composables/useGeolocation'
 import { useMap } from '@/composables/useMap'
 import { useRouteStore } from '@/stores/route'
@@ -251,24 +267,52 @@ defineExpose({ isReady })
   }
   .route-map__top-container {
     position: absolute;
-    top: 42px;
+    top: 5%;
     z-index: 10;
     display: flex;
     width: 100%;
     padding-inline: var(--content-padding-inline);
-    .geolocation-button {
-      margin-left: auto;
+    pointer-events: none;
+    button {
+      pointer-events: auto;
     }
   }
   .route-map__bottom-container {
     position: absolute;
-    bottom: 8px;
+    bottom: 5%;
     display: flex;
     align-items: center;
+    align-items: end;
+    justify-content: space-between;
+    width: 100%;
     padding-inline: var(--content-padding-inline);
     color: var(--color-accent);
-    span {
-      -webkit-text-stroke: 1px rgb(0 0 0 / 9.5%);
+    pointer-events: none;
+    .bottom-container__right-side,
+    .bottom-container__left-side {
+      display: flex;
+      flex-direction: column;
+    }
+    .bottom-container__left-side {
+      div {
+        display: flex;
+      }
+      span {
+        -webkit-text-stroke: 1px rgb(0 0 0 / 9.5%);
+      }
+    }
+    .bottom-container__right-side {
+      gap: 4rem;
+      div {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+    button {
+      pointer-events: auto;
+    }
+  }
   .maplibregl-ctrl.maplibregl-ctrl-attrib,
   .maplibregl-ctrl-top-right {
     font-size: 0.5rem;
