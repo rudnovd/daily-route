@@ -5,7 +5,9 @@
     class="button-transition-border"
     @pointerdown="startTransition"
     @pointerup="stopTransition"
-    @contextmenu="e => e.preventDefault()"
+    @pointercancel="stopTransition"
+    @pointerleave="stopTransition"
+    @contextmenu.prevent
   >
     <slot />
   </button>
@@ -25,7 +27,7 @@ function startTransition(event: PointerEvent) {
     event.preventDefault()
   }
   event.stopPropagation()
-  buttonRef.value.classList.toggle('border-animation')
+  buttonRef.value.classList.add('border-animation')
   buttonRef.value.onanimationend = () => {
     emit('animationend')
   }
@@ -38,7 +40,7 @@ function stopTransition(event: PointerEvent) {
     event.preventDefault()
   }
   event.stopPropagation()
-  buttonRef.value.classList.toggle('border-animation')
+  buttonRef.value.classList.remove('border-animation')
   buttonRef.value.onanimationend = null
 }
 </script>
