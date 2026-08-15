@@ -15,6 +15,7 @@
       </figure>
       <button
         v-if="userStore.user?.is_anonymous"
+        v-wave
         class="button-primary"
         :disabled="isLoading || !!routeStore.path || !userStore.isOnline"
         @click="linkAccountToGoogle"
@@ -26,7 +27,7 @@
     <div class="profile-streak-data">
       <div class="profile-streak-data__days">
         {{ $t('profile.currentStreak') }}:
-        <span class="tabular-num">{{ userStore.daysStreak }}</span>
+        <span class="tabular-num">{{ routeStore.daysStreak }}</span>
       </div>
       <StreakCalendar />
     </div>

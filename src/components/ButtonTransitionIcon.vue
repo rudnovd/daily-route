@@ -17,10 +17,13 @@
       </Transition>
     </div>
     <button
+      v-wave
       v-bind="$attrs"
       @pointerdown="startButtonTransition"
       @pointerup="stopButtonTransition"
-      @contextmenu="e => e.preventDefault()"
+      @pointercancel="stopButtonTransition"
+      @pointerleave="stopButtonTransition"
+      @contextmenu.prevent
     >
       <slot />
     </button>

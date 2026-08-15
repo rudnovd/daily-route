@@ -20,7 +20,7 @@ export function useMap(container: ReturnType<typeof useTemplateRef<HTMLElement>>
       style: darkTheme.matches ? MapStyle.STREETS_V4.DARK : MapStyle.STREETS_V4.DEFAULT,
       geolocateControl: false,
       navigationControl: false,
-      logoPosition: 'bottom-right',
+      logoPosition: 'top-right',
       zoom: 16,
       minZoom: 10,
       maxZoom: 18,

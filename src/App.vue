@@ -76,7 +76,6 @@ onBeforeMount(async () => {
   }
   if (userStore.isAuthenticated) {
     routeStore.getRoutes().then(cancelExpiredRoute)
-    userStore.getDaysStreak()
   }
 })
 if (import.meta.env.VITE_IS_TAURI) {
@@ -115,7 +114,6 @@ supabase.auth.onAuthStateChange((_, session) => {
 })
 whenever(() => userStore.isAuthenticated, () => {
   routeStore.getRoutes().then(cancelExpiredRoute)
-  userStore.getDaysStreak()
 })
 </script>
 

@@ -1,10 +1,13 @@
 <template>
   <button
     ref="buttonElement"
+    v-wave
     class="button-transition-border"
     @pointerdown="startTransition"
     @pointerup="stopTransition"
-    @contextmenu="e => e.preventDefault()"
+    @pointercancel="stopTransition"
+    @pointerleave="stopTransition"
+    @contextmenu.prevent
   >
     <slot />
   </button>
@@ -24,7 +27,7 @@ function startTransition(event: PointerEvent) {
     event.preventDefault()
   }
   event.stopPropagation()
-  buttonRef.value.classList.toggle('border-animation')
+  buttonRef.value.classList.add('border-animation')
   buttonRef.value.onanimationend = () => {
     emit('animationend')
   }
@@ -37,7 +40,7 @@ function stopTransition(event: PointerEvent) {
     event.preventDefault()
   }
   event.stopPropagation()
-  buttonRef.value.classList.toggle('border-animation')
+  buttonRef.value.classList.remove('border-animation')
   buttonRef.value.onanimationend = null
 }
 </script>
@@ -55,12 +58,14 @@ function stopTransition(event: PointerEvent) {
 }
 .button-transition-border {
   border: 4px solid transparent;
+  transition: scale 1s;
   &.border-animation {
     color: oklch(100% 0 0deg);
     background:
       linear-gradient(var(--color-error), var(--color-error)) padding-box,
       conic-gradient(var(--color-accent) var(--gradient-angle), transparent calc(var(--gradient-angle) - 180deg))
         border-box;
+    scale: 1.2;
     animation: change-gradient-angle var(--duration-long) linear;
   }
 }

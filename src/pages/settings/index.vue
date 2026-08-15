@@ -62,7 +62,8 @@
       <a
         v-if="!VITE_IS_TAURI"
         class="color-accent"
-        :href="`https://github.com/rudnovd/daily-route/releases/tag/v${VITE_APP_VERSION}`"
+        href="https://github.com/rudnovd/daily-route/releases/latest"
+        target="_blank"
       >
         {{ $t('settings.androidApp') }}
       </a>

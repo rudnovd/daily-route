@@ -2,13 +2,13 @@
   <nav class="navbar">
     <ul class="navbar__list">
       <li>
-        <router-link class="button-link" to="/">
+        <router-link v-wave class="button-link" to="/">
           <MdiMapMarkerIcon />
           <span>{{ $t('index.title') }}</span>
         </router-link>
       </li>
       <li>
-        <router-link class="button-link" to="/profile">
+        <router-link v-wave class="button-link" to="/profile">
           <img
             v-if="userStore.user?.user_metadata.avatar_url"
             :src="userStore.user.user_metadata.avatar_url"
@@ -19,7 +19,7 @@
         </router-link>
       </li>
       <li>
-        <router-link class="button-link" to="/settings">
+        <router-link v-wave class="button-link" to="/settings">
           <MdiCogIcon />
           <span>{{ $t('settings.title') }}</span>
         </router-link>
