@@ -61,7 +61,7 @@
     --color-border: oklch(33.44% 0.0239 258.36deg);
   }
 
-  --duration-long: 4s;
+  --duration-long: 3s;
   --icon-button-medium-size: 3rem;
   --icon-button-large-size: 4rem;
   --navigation-header-padding-top: 32px;
