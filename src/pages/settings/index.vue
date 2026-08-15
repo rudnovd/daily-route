@@ -67,9 +67,9 @@
       >
         {{ $t('settings.androidApp') }}
       </a>
-      <span class="version">
+      <a href="https://github.com/rudnovd/daily-route" class="version">
         {{ VITE_APP_VERSION }} ({{ VITE_GIT_COMMIT_SHA }})
-      </span>
+      </a>
     </div>
   </section>
 </template>
