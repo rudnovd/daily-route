@@ -5,7 +5,6 @@ import type { Locale } from 'vue-i18n'
 import { openUrl } from '@tauri-apps/plugin-opener'
 import { useLocalStorage, useOnline } from '@vueuse/core'
 import { defineStore } from 'pinia'
-import { getRoutesStreak } from '@/api/userRoute'
 import { getAppLocale } from '@/i18n'
 import { supabase } from '@/supabase'
 
@@ -18,7 +17,6 @@ interface UserSettings {
 interface UserState {
   user: User | null
   isOnline: Ref<boolean>
-  daysStreak: ReturnType<typeof useLocalStorage<number>>
   settings: ReturnType<typeof useLocalStorage<UserSettings>>
 }
 
@@ -26,7 +24,6 @@ export const useUserStore = defineStore('user', {
   state: (): UserState => ({
     user: null,
     isOnline: useOnline(),
-    daysStreak: useLocalStorage<number>('daysStreak', 0),
     settings: useLocalStorage<UserSettings>('settings', {
       locale: getAppLocale(),
       dailyRouteStartGeometry: null,
@@ -158,11 +155,6 @@ export const useUserStore = defineStore('user', {
     },
     async changeLocale(locale: Locale) {
       this.settings.locale = locale
-    },
-    async getDaysStreak(): Promise<number> {
-      const count = await getRoutesStreak()
-      this.daysStreak = count ?? this.daysStreak
-      return this.daysStreak
     },
   },
 })

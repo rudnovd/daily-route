@@ -180,39 +180,3 @@ export async function finishUserRoute(userRouteId: UserRoute['id']) {
   }
   return data
 }
-
-export async function getRoutesStreak() {
-  const { data: { session }, error: userError } = await supabase.auth.getSession()
-  if (userError) {
-    throw userError
-  }
-  else if (!session?.user) {
-    throw new Error('User not found')
-  }
-  const { data, error } = await supabase
-    .from('user_routes')
-    .select('finished_at')
-    .eq('user_id', session.user.id)
-    .in('status', ['finished', 'frozen'])
-    .not('finished_at', 'is', null)
-    .order('finished_at', { ascending: false })
-    .limit(500)
-  if (error) {
-    throw error
-  }
-  const uniqueDatesSet = new Set<string>()
-  data.forEach(({ finished_at }) => uniqueDatesSet.add(Temporal.PlainDate.from(finished_at).toString()))
-  let count = 0
-  let currentDate: string | null = null
-  for (const date of uniqueDatesSet) {
-    if (!currentDate) {
-      currentDate = date
-      continue
-    }
-    const daysDiff = Temporal.PlainDate.from(date).until(Temporal.PlainDate.from(currentDate)).days
-    if (daysDiff === 1) {
-      count++
-    }
-  }
-  return count
-}

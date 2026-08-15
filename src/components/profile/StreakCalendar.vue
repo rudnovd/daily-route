@@ -8,7 +8,7 @@
     >
       <span class="streak-calendar__day">{{ streakDate.plainDate.day }}</span>
       <span class="streak-calendar__month">{{ streakDate.formattedMonthString }}</span>
-      <template v-if="streakDate.plainDate.until(now).days >= 0">
+      <template v-if="streakDate.showStatus && streakDate.plainDate.until(now).days >= 0">
         <MdiCheckBoldIcon v-if="streakDate.isCompleted" class="streak-calendar__icon color-success" />
         <MdiCloseThickIcon v-else class="streak-calendar__icon color-error" />
       </template>
@@ -28,6 +28,7 @@ interface StreakCalendarDate {
   plainDate: Temporal.PlainDate
   isCompleted: boolean
   formattedMonthString: ReturnType<Intl.DateTimeFormat['format']>
+  showStatus: boolean
 }
 const streakCalendarDates = ref<Array<StreakCalendarDate>>([])
 function formatStreakDate(date: Temporal.PlainDate): StreakCalendarDate {
@@ -35,9 +36,10 @@ function formatStreakDate(date: Temporal.PlainDate): StreakCalendarDate {
     plainDate: date,
     isCompleted: false,
     formattedMonthString: new Intl.DateTimeFormat(getAppLocale(), { month: 'long' }).format(date),
+    showStatus: true,
   }
 }
-const DISPLAYED_DAYS = 5
+const DISPLAYED_DAYS = 4
 const now = Temporal.PlainDate.from(Temporal.Now.plainDateISO())
 const substractedDate = now.subtract(Temporal.Duration.from({ days: DISPLAYED_DAYS }))
 const routeStore = useRouteStore()
@@ -47,7 +49,21 @@ onMounted(() => {
     streakCalendarDates.value.push(formatStreakDate(date))
   }
   for (const dailyRoute of routeStore.routes) {
-    if (!dailyRoute.status) {
+    const plainCreatedAt = Temporal.PlainDate.from(dailyRoute.created_at)
+    const isCurrentDay = now.until(plainCreatedAt).days === 0
+    if (isCurrentDay) {
+      const streakDate = streakCalendarDates.value.find(streakDay => streakDay.plainDate.day === plainCreatedAt.day)
+      if (streakDate) {
+        if (dailyRoute.status === 'finished') {
+          streakDate.isCompleted = true
+        }
+        else if (dailyRoute.status === 'canceled') {
+          streakDate.isCompleted = false
+        }
+        else {
+          streakDate.showStatus = false
+        }
+      }
       continue
     }
     if (dailyRoute.status === 'finished' && dailyRoute.finished_at) {
@@ -80,7 +96,7 @@ function composeStreakDateClass(streakDate: StreakCalendarDate) {
 .streak-calendar {
   display: grid;
   grid-template-rows: 64px;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   justify-items: center;
   width: 100%;
   border: 1px solid var(--color-text);

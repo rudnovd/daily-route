@@ -46,6 +46,30 @@ export const useRouteStore = defineStore('route', {
       }
       return Math.max(Math.floor((this.totalDistance - this.currentDistance) / this.totalDistance * 100), 0)
     },
+    daysStreak(): number {
+      const datesStatuses = this.routes.reduce((acc: Record<string, UserRoute['status']>, route) => {
+        const date = Temporal.PlainDate.from(route.created_at).toString()
+        if (date in acc) {
+          return acc
+        }
+        acc[date] = route.status
+        return acc
+      }, {})
+      let streak = 0
+      let dateToCompare = Temporal.PlainDate.from(Temporal.Now.plainDateISO())
+      for (const date in datesStatuses) {
+        const plainDate = Temporal.PlainDate.from(date)
+        const daysUntilDateToCompare = plainDate.until(dateToCompare).days
+        if (daysUntilDateToCompare > 1 || datesStatuses[date] === 'canceled') {
+          break
+        }
+        if (datesStatuses[date] === 'finished' || datesStatuses[date] === 'frozen') {
+          streak++
+        }
+        dateToCompare = Temporal.PlainDate.from(date)
+      }
+      return streak
+    },
   },
   actions: {
     isStartedStatus(status: UserRoute['status'] | null): boolean {
@@ -57,7 +81,7 @@ export const useRouteStore = defineStore('route', {
       return status ? FINISHED_STATUSES.includes(status) : false
     },
     async getRoutes(): Promise<Array<UserRoute>> {
-      const userDailyRoutes = await getUserRoutes()
+      const userDailyRoutes = await getUserRoutes(365)
       this.routes = userDailyRoutes
       return userDailyRoutes
     },
