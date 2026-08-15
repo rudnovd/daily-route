@@ -46,6 +46,18 @@ export const useRouteStore = defineStore('route', {
       }
       return Math.max(Math.floor((this.totalDistance - this.currentDistance) / this.totalDistance * 100), 0)
     },
+    isDailyRouteCompleted(): boolean {
+      if (!this.lastRoute) {
+        return false
+      }
+      const now = Temporal.PlainDate.from(Temporal.Now.plainDateTimeISO())
+      const lastRouteDate = Temporal.PlainDate.from(this.lastRoute.created_at)
+      if (lastRouteDate.until(now).days > 0) {
+        return false
+      }
+      const FINISHED_STATUSES: ReadonlyArray<UserRoute['status']> = ['canceled', 'finished', 'frozen']
+      return this.lastRoute.status ? FINISHED_STATUSES.includes(this.lastRoute.status) : false
+    },
     daysStreak(): number {
       const datesStatuses = this.routes.reduce((acc: Record<string, UserRoute['status']>, route) => {
         const date = Temporal.PlainDate.from(route.created_at).toString()

@@ -20,7 +20,7 @@
           {{ $t('index.setRadius') }}
         </router-link>
       </div>
-      <div v-else-if="isDailyRouteCompleted" class="route__completed-route">
+      <div v-else-if="routeStore.isDailyRouteCompleted" class="route__completed-route">
         <div class="completed-route__title">
           <template v-if="routeStore.lastRoute?.status === 'finished'">
             {{ $t('index.dailyRouteFinished') }}
@@ -130,20 +130,9 @@ const isFarFromStartPoint = computed<boolean>(() => {
   const geolocationPointLngLat = new LngLat(position.value.coords.longitude, position.value.coords.latitude)
   return startPositionLngLat.distanceTo(geolocationPointLngLat) >= MIN_DISTANCE_TO_START
 })
-const isDailyRouteCompleted = computed(() => {
-  if (!routeStore.lastRoute) {
-    return false
-  }
-  const now = Temporal.PlainDate.from(Temporal.Now.plainDateTimeISO())
-  const lastRouteDate = Temporal.PlainDate.from(routeStore.lastRoute.created_at)
-  if (lastRouteDate.until(now).days > 0) {
-    return false
-  }
-  return routeStore.isFinishedStatus(routeStore.lastRoute.status)
-})
 const isStartButtonAvailable = computed<boolean>(() => {
   const hasStartPositionAndRadius = !!userStore.dailyRouteStartPosition && !!userStore.radiusBbox
-  if (!mapRef.value?.isReady || !hasStartPositionAndRadius || isDailyRouteCompleted.value) {
+  if (!mapRef.value?.isReady || !hasStartPositionAndRadius || routeStore.isDailyRouteCompleted) {
     return false
   }
   return !isFarFromStartPoint.value
