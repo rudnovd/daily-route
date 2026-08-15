@@ -267,7 +267,7 @@ defineExpose({ isReady })
   }
   .route-map__top-container {
     position: absolute;
-    top: 5%;
+    top: 42px;
     z-index: 10;
     display: flex;
     width: 100%;
@@ -279,7 +279,7 @@ defineExpose({ isReady })
   }
   .route-map__bottom-container {
     position: absolute;
-    bottom: 5%;
+    bottom: 24px;
     display: flex;
     align-items: center;
     align-items: end;
