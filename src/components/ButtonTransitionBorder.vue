@@ -58,12 +58,14 @@ function stopTransition(event: PointerEvent) {
 }
 .button-transition-border {
   border: 4px solid transparent;
+  transition: scale 1s;
   &.border-animation {
     color: oklch(100% 0 0deg);
     background:
       linear-gradient(var(--color-error), var(--color-error)) padding-box,
       conic-gradient(var(--color-accent) var(--gradient-angle), transparent calc(var(--gradient-angle) - 180deg))
         border-box;
+    scale: 1.2;
     animation: change-gradient-angle var(--duration-long) linear;
   }
 }
