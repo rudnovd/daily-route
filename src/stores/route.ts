@@ -127,6 +127,7 @@ export const useRouteStore = defineStore('route', {
       }
       const canceledRoute = await cancelUserRoute(this.routes[routeIndex].id)
       this.routes[routeIndex] = canceledRoute
+      this.getRoutes()
       this.path = null
       this.state = null
     },
