@@ -39,7 +39,7 @@ import type { GeoJSONSource } from '@maptiler/sdk'
 import type { Position } from 'geojson'
 import { Marker } from '@maptiler/sdk'
 import { distance, nearestPointOnLine, point } from '@turf/turf'
-import { whenever } from '@vueuse/core'
+import { useTimeoutPoll, whenever } from '@vueuse/core'
 import { onActivated, onDeactivated, useTemplateRef, watch } from 'vue'
 import MdiEyeIcon from '~icons/mdi/eye'
 import MdiEyeOffIcon from '~icons/mdi/eye-off'
@@ -52,9 +52,22 @@ import { useMap } from '@/composables/useMap'
 import { useRouteStore } from '@/stores/route'
 import { useUserStore } from '@/stores/user'
 
+const routeStore = useRouteStore()
+const userStore = useUserStore()
 const { position, watch: watchGeolocation, clear: clearWatcher, getPosition } = useGeolocation()
-onActivated(watchGeolocation)
-onDeactivated(clearWatcher)
+const { pause: pauseUpdateRouteLine, resume: resumeUpdateRouteLine } = useTimeoutPoll(recalculateAndUpdateRouteLine, 60_000, { immediate: false })
+onActivated(() => {
+  watchGeolocation()
+  if (routeStore.status === 'started' && userStore.settings.isRoutePathVisible) {
+    resumeUpdateRouteLine()
+  }
+})
+onDeactivated(() => {
+  clearWatcher()
+  if (routeStore.status === 'started' && userStore.settings.isRoutePathVisible) {
+    pauseUpdateRouteLine()
+  }
+})
 
 const mapRef = useTemplateRef('mapElement')
 const { map, isReady } = useMap(mapRef)
@@ -65,8 +78,6 @@ async function moveMapToUserGeolocation() {
   const { coords: { longitude, latitude } } = await getPosition()
   map.value.setCenter([longitude, latitude])
 }
-const userStore = useUserStore()
-const routeStore = useRouteStore()
 whenever(isReady, async () => {
   const { coords: { longitude, latitude } } = await getPosition()
   initGeolocationPoint([longitude, latitude])
@@ -75,7 +86,6 @@ whenever(isReady, async () => {
   }
   if (routeStore.path) {
     initFinishMarker()
-    initRouteLine()
   }
 }, { once: true })
 let startMarker: Marker | null = null
@@ -167,10 +177,13 @@ watch(position, async ({ coords: { longitude, latitude } }) => {
   const currentPositionPoint = point([longitude, latitude])
   const { properties: { pointDistance } } = nearestPointOnLine(path, currentPositionPoint, { units: 'meters' })
   if (pointDistance > 100) {
-    await routeStore.recalculateCurrentRoutePath()
-    updateRouteLine()
+    await recalculateAndUpdateRouteLine()
   }
 }, { deep: true })
+async function recalculateAndUpdateRouteLine() {
+  await routeStore.calculateCurrentRoutePath()
+  updateRouteLine()
+}
 
 async function togglePathVisibility() {
   userStore.settings.isRoutePathVisible = !userStore.settings.isRoutePathVisible
@@ -219,9 +232,7 @@ function updateRouteLine() {
   if (!map.value || !routeStore.path) {
     return
   }
-  const routePathSource = map.value?.getSource<GeoJSONSource>(
-    ROUTE_LINE_SOURCE_KEY,
-  )
+  const routePathSource = map.value?.getSource<GeoJSONSource>(ROUTE_LINE_SOURCE_KEY)
   if (routePathSource) {
     routePathSource.setData(routeStore.path)
   }
@@ -245,7 +256,6 @@ watch(
       if (finishMarker) {
         map.value.setCenter(finishMarker.getLngLat())
       }
-      initRouteLine()
       map.value.setZoom(12)
     }
     else if (!status) {
@@ -254,11 +264,19 @@ watch(
     }
   },
 )
+watch(() => routeStore.path, (path) => {
+  if (!path) {
+    removeRouteLine()
+  }
+  const hasRouteLineLayer = !!map.value?.getLayer(ROUTE_LINE_LAYER_KEY)
+  if (!hasRouteLineLayer) {
+    initRouteLine()
+  }
+}, { immediate: true })
 defineExpose({ isReady })
 </script>
 
 <style>
-@import url('@maptiler/sdk/dist/maptiler-sdk.css');
 .route-map {
   position: relative;
   height: 100%;
@@ -267,7 +285,7 @@ defineExpose({ isReady })
   }
   .route-map__top-container {
     position: absolute;
-    top: 5%;
+    top: 42px;
     z-index: 10;
     display: flex;
     width: 100%;
@@ -279,7 +297,7 @@ defineExpose({ isReady })
   }
   .route-map__bottom-container {
     position: absolute;
-    bottom: 5%;
+    bottom: 24px;
     display: flex;
     align-items: center;
     align-items: end;
@@ -311,15 +329,6 @@ defineExpose({ isReady })
     }
     button {
       pointer-events: auto;
-    }
-  }
-  .maplibregl-ctrl.maplibregl-ctrl-attrib,
-  .maplibregl-ctrl-top-right {
-    font-size: 0.5rem;
-    background-color: transparent;
-    opacity: 0.5;
-    a {
-      color: var(--color-text);
     }
   }
 }

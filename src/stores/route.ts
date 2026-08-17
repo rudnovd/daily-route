@@ -127,6 +127,7 @@ export const useRouteStore = defineStore('route', {
       }
       const canceledRoute = await cancelUserRoute(this.routes[routeIndex].id)
       this.routes[routeIndex] = canceledRoute
+      this.getRoutes()
       this.path = null
       this.state = null
     },
@@ -164,7 +165,7 @@ export const useRouteStore = defineStore('route', {
       this.routes[routeIndex] = unpausedRoute
       this.state = unpausedRoute
     },
-    async recalculateCurrentRoutePath(): Promise<FeatureCollection<LineString>> {
+    async calculateCurrentRoutePath(): Promise<FeatureCollection<LineString>> {
       if (!this.state) {
         throw new Error('No active route')
       }

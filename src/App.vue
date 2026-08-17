@@ -122,6 +122,7 @@ whenever(() => userStore.isAuthenticated, () => {
 @import url('./assets/styles/root.css');
 @import url('./assets/styles/buttons.css');
 @import url('./assets/styles/notification.css');
+@import url('./assets/styles/map.css');
 .navigation-header + hr {
   margin-block: var(--header-horizontal-rule-margin-block);
   border-width: var(--header-horizontal-rule-border-width);

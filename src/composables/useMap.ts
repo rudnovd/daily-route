@@ -5,12 +5,15 @@ import { onMounted, onUnmounted, ref, shallowRef } from 'vue'
 import { useUserStore } from '@/stores/user'
 import { useGeolocation } from './useGeolocation'
 
-export function useMap(container: ReturnType<typeof useTemplateRef<HTMLElement>>, options?: Omit<MapOptions, 'container'>) {
+export function useMap(
+  container: ReturnType<typeof useTemplateRef<HTMLElement>>,
+  mapOptions?: Omit<MapOptions, 'container'>,
+) {
   const userStore = useUserStore()
   const map = shallowRef<Map | null>(null)
   const isReady = ref<boolean>(false)
   const darkTheme = window.matchMedia('(prefers-color-scheme: dark)')
-  onMounted(async () => {
+  async function setup() {
     if (!container.value) {
       return console.error('Container not found')
     }
@@ -24,7 +27,9 @@ export function useMap(container: ReturnType<typeof useTemplateRef<HTMLElement>>
       zoom: 16,
       minZoom: 10,
       maxZoom: 18,
-      ...options,
+      keyboard: false,
+      dragRotate: false,
+      ...mapOptions,
     })
     const loadedMap = await map.value.onLoadAsync()
     try {
@@ -41,14 +46,17 @@ export function useMap(container: ReturnType<typeof useTemplateRef<HTMLElement>>
     finally {
       isReady.value = true
     }
-  })
-  onUnmounted(() => {
+  }
+  function destroy() {
     isReady.value = false
     map.value?.remove()
     map.value = null
-  })
+  }
+  onMounted(setup)
+  onUnmounted(destroy)
 
   return {
+    setup,
     map,
     isReady,
   }

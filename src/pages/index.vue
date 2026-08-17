@@ -69,12 +69,13 @@
           :disabled="isDailyRouteGenerating || !userStore.isOnline"
           class="button-primary route__start-button"
           data-onboarding-element="start-daily-route-button"
-          @transitionend="startDailyRoute"
+          @transitionend="generateDailyRoute"
         >
           {{ $t('index.buttons.startDailyRoute') }}
         </ButtonTransitionIcon>
       </div>
     </div>
+    <RouteConfirmationDialog v-if="isPreviewRouteModalActive" v-model="isPreviewRouteModalActive" />
   </section>
 </template>
 
@@ -105,6 +106,7 @@ definePage({ meta: { title: 'index.title', hideTopPadding: true } })
 const MdiCheckBoldIcon = defineAsyncComponent(() => import('~icons/mdi/check-bold'))
 const MdiCloseThickIcon = defineAsyncComponent(() => import('~icons/mdi/close-thick'))
 const MdiSnowfallIcon = defineAsyncComponent(() => import('~icons/mdi/snowflake'))
+const RouteConfirmationDialog = defineAsyncComponent(() => import('@/components/route/RouteConfirmationDialog.vue'))
 
 const routeStore = useRouteStore()
 const mapRef = useTemplateRef('mapElement')
@@ -144,7 +146,7 @@ const isFinishButtonAvailable = computed<boolean>(() => {
   return routeStore.completedPercent >= 90
 })
 const isDailyRouteGenerating = ref<boolean>(false)
-async function startDailyRoute() {
+async function generateDailyRoute() {
   if (!userStore.isAuthenticated) {
     return router.push('/profile/signin')
   }
@@ -155,9 +157,6 @@ async function startDailyRoute() {
   else if (!userStore.radiusBbox) {
     toast.error('Start point not set')
     throw new Error('Start point not set')
-  }
-  else if (routeStore.lastRoute?.status === 'generated') {
-    await routeStore.startRoute(routeStore.lastRoute.id)
   }
   try {
     isDailyRouteGenerating.value = true
@@ -179,8 +178,8 @@ async function startDailyRoute() {
       start_geometry: { type: 'Point', coordinates: userStore.dailyRouteStartPosition },
       finish_geometry: { type: 'Point', coordinates: finishPoint.coordinates },
     }
-    const route = await routeStore.createRoute(newRoute)
-    await routeStore.startRoute(route.id)
+    await routeStore.createRoute(newRoute)
+    await routeStore.calculateCurrentRoutePath()
   }
   finally {
     isDailyRouteGenerating.value = false
@@ -201,7 +200,15 @@ async function finishDailyRoute() {
     isControlsLoading.value = false
   }
 }
+const isPreviewRouteModalActive = ref<boolean>(false)
 watch(() => routeStore.status, (newStatus) => {
+  if (newStatus === 'generated') {
+    isPreviewRouteModalActive.value = true
+    if (!routeStore.path) {
+      routeStore.calculateCurrentRoutePath()
+    }
+  }
+
   if (newStatus === 'started') {
     stopwatch.start()
   }
