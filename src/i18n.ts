@@ -17,6 +17,9 @@ export const i18n = createI18n({
   locale: getAppLocale(),
   fallbackLocale: DEFAULT_LOCALE,
   availableLocales: AVAILABLE_LOCALES,
+  pluralRules: {
+    ru: pluralizationRu,
+  },
 })
 export async function loadLocaleMessages(locale: Locale): Promise<Record<string, any>> {
   return await import(`./locales/${locale}.json`, { with: { type: 'json' } })
@@ -26,4 +29,11 @@ export async function setLocale(locale: Locale) {
   i18n.global.setLocaleMessage(locale, messages.default)
   i18n.global.locale.value = locale
   document.documentElement.setAttribute('lang', locale)
+}
+function pluralizationRu(count: number) {
+  if (count % 10 === 1 && count % 100 !== 11)
+    return 0
+  else if (count % 10 >= 2 && count % 10 <= 4 && (count % 100 < 10 || count % 100 >= 20))
+    return 1
+  return 2
 }
