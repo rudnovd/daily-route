@@ -258,7 +258,6 @@ defineExpose({ isReady })
 </script>
 
 <style>
-@import url('@maptiler/sdk/dist/maptiler-sdk.css');
 .route-map {
   position: relative;
   height: 100%;
@@ -311,15 +310,6 @@ defineExpose({ isReady })
     }
     button {
       pointer-events: auto;
-    }
-  }
-  .maplibregl-ctrl.maplibregl-ctrl-attrib,
-  .maplibregl-ctrl-top-right {
-    font-size: 0.5rem;
-    background-color: transparent;
-    opacity: 0.5;
-    a {
-      color: var(--color-text);
     }
   }
 }

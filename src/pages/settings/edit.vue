@@ -252,7 +252,6 @@ async function saveTarget() {
 </script>
 
 <style>
-@import url('@maptiler/sdk/dist/maptiler-sdk.css');
 .settings-edit-page {
   display: flex;
   flex-direction: column;
