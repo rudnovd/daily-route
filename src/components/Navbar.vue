@@ -3,7 +3,7 @@
     <ul class="navbar__list">
       <li>
         <router-link v-wave class="button-link" to="/">
-          <MdiMapMarkerIcon />
+          <Icon icon="mdi:map-marker" />
           <span>{{ $t('index.title') }}</span>
         </router-link>
       </li>
@@ -14,13 +14,13 @@
             :src="userStore.user.user_metadata.avatar_url"
             :alt="`${userStore.user?.user_metadata.name}'s avatar`"
           >
-          <MdiAccountIcon v-else />
+          <Icon v-else icon="mdi:account" />
           <span>{{ $t('profile.title') }}</span>
         </router-link>
       </li>
       <li>
         <router-link v-wave class="button-link" to="/settings">
-          <MdiCogIcon />
+          <Icon icon="mdi:cog" />
           <span>{{ $t('settings.title') }}</span>
         </router-link>
       </li>
@@ -29,11 +29,7 @@
 </template>
 
 <script setup lang="ts">
-import MdiAccountIcon from '~icons/mdi/account'
-import MdiCogIcon from '~icons/mdi/cog'
-import MdiMapMarkerIcon from '~icons/mdi/map-marker'
-// import MdiRoutesIcon from '~icons/mdi/routes'
-// import MdiTrophyIcon from '~icons/mdi/trophy'
+import { Icon } from '@iconify/vue'
 import { useUserStore } from '@/stores/user'
 
 const userStore = useUserStore()

@@ -1,12 +1,12 @@
 <template>
   <div class="walker-loading">
-    <MdiWalkIcon class="walk-icon" />
+    <Icon icon="mdi:walk" class="walk-icon" />
     <slot />
   </div>
 </template>
 
 <script setup lang="ts">
-import MdiWalkIcon from '~icons/mdi/walk'
+import { Icon } from '@iconify/vue'
 </script>
 
 <style>
