@@ -1,4 +1,10 @@
 {
+  "units": {
+    "meters": "метр | {n} метра | {n} метров",
+    "kilometes": "километр | {n} километра | {n} километров",
+    "metersShort": "м",
+    "kilometersShort": "км"
+  },
   "app": {
     "noConnection": "No connection"
   },
@@ -23,7 +29,20 @@
     "dailyRouteFinished": "Today’s daily route is на сегодня завершен",
     "dailyRouteFrozen": "Today's daily route is frozen",
     "dailyRouteCanceled": "Today's daily route has been cancelled",
-    "comeBackTomorrow": "Come back tomorrow"
+    "comeBackTomorrow": "Come back tomorrow",
+    "routeConfirmationDialog": {
+      "distance": "Distance",
+      "duration": "Duration",
+      "buttons": {
+        "cancel": "Cancel",
+        "accept": "Accept"
+      },
+      "notifications": {
+        "routeCanceled": "Route canceled",
+        "failedToCancelRoute": "Failed to cancel route",
+        "failedToStartRoute": "Failed to start route"
+      }
+    }
   },
   "settings": {
     "title": "Settings",
