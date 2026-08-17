@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.5.0](https://github.com/rudnovd/daily-route/compare/v0.4.0...v0.5.0) (2026-08-17)
+
+
+### Features
+
+* **i18n:** add pluralRules ([9c3a775](https://github.com/rudnovd/daily-route/commit/9c3a775b7ee399f3a1f55e2a9ed33c5644667892))
+* **index-page:** add route confirmation dialog ([8171a98](https://github.com/rudnovd/daily-route/commit/8171a98269d36223712b0a93ee32504a92579b66))
+* **RouteMap:** update route line every 60 seconds ([940ed83](https://github.com/rudnovd/daily-route/commit/940ed8356de322b9e615892bc5e2a03dbec0da9e))
+* **settings-page:** add link to repository ([018bec9](https://github.com/rudnovd/daily-route/commit/018bec98c04b9a91f27b8cf8ab1e647cef30f450))
+
+
+### Bug Fixes
+
+* **ci:** use token for release workflow ([552e9ce](https://github.com/rudnovd/daily-route/commit/552e9ce39597d26384cd45cc49af78e99a0ffbc6))
+* **RouteMap:** set fixed px positions for top and bottom containers ([e17ff6c](https://github.com/rudnovd/daily-route/commit/e17ff6ccd64b7dc687827d062efa0fa9c10f7b20))
+* **route:** refetch routes after cancel ([3487838](https://github.com/rudnovd/daily-route/commit/3487838dc8d52539b909ffeb433fff2cd5245200))
+* **styles:** change navbar-position-bottom for web deployment ([107017c](https://github.com/rudnovd/daily-route/commit/107017c0ddbc27afa808469ad00b7f911c004d5c))
+* **styles:** fix wrong buttons variables ([f697413](https://github.com/rudnovd/daily-route/commit/f6974134c9cc55967dced3ff070e500611cc264f))
+
 ## [0.4.0](https://github.com/rudnovd/daily-route/compare/v0.3.0...v0.4.0) (2026-08-15)
 
 
