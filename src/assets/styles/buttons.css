@@ -99,10 +99,10 @@ button,
     background: var(--color-error-hover);
   }
   &:active {
-    background-color: var(--color-danger-active);
+    background-color: var(--color-error-active);
   }
   &:disabled {
-    background-color: var(--color-danger-disabled);
+    background-color: var(--color-error-disabled);
   }
 }
 .button-ghost {
