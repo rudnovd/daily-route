@@ -1,78 +1,73 @@
-import { StorageSerializers, useEventListener, useLocalStorage } from '@vueuse/core'
-import { computed, onUnmounted, ref } from 'vue'
-import { getAppLocale } from '@/i18n'
+import { createSharedComposable, useLocalStorage } from '@vueuse/core'
+import { computed, ref, watch } from 'vue'
 import 'temporal-polyfill/global'
 
+type ms = number
 interface Stopwatch {
-  startTime: ReturnType<Temporal.Instant['toString']> | null
-  duration: ReturnType<Temporal.Duration['toString']>
+  duration: ms
+  isStarted: boolean
 }
-const FORMATTER_OPTIONS = {
-  minute: '2-digit',
-  second: '2-digit',
-  hour12: false,
-  timeZone: 'UTC',
-} as const as Intl.DateTimeFormatOptions
-export function useStopwatch() {
-  let frameRequestId: ReturnType<typeof requestAnimationFrame> | null = null
-  function clearFrameRequest() {
-    if (!frameRequestId) {
-      return
-    }
-    cancelAnimationFrame(frameRequestId)
-    frameRequestId = null
-  }
-
-  const duration = ref(Temporal.Duration.from({ seconds: 0 }))
+export const useStopwatch = createSharedComposable(() => {
   const stopwatch = useLocalStorage<Stopwatch>('stopwatch', {
-    startTime: null,
-    duration: duration.value.toString(),
-  }, { serializer: StorageSerializers.object })
-  function tick() {
-    if (!stopwatch.value.startTime) {
+    duration: 0,
+    isStarted: false,
+  })
+  let timestamp: ReturnType<Performance['now']> = performance.now()
+  const duration = ref<Stopwatch['duration']>(stopwatch.value.duration)
+
+  let intervalID: ReturnType<typeof setInterval> | null = null
+  function clearIntervalRequest() {
+    if (intervalID === null) {
       return
     }
-    frameRequestId = requestAnimationFrame(tick)
-    duration.value = Temporal.Now.instant().since(stopwatch.value.startTime)
+    clearInterval(intervalID)
+    intervalID = null
+  }
+  function updateDuration() {
+    const currentTimestamp = performance.now()
+    duration.value += currentTimestamp - timestamp
+    timestamp = currentTimestamp
   }
   function start() {
-    if (frameRequestId) {
+    if (intervalID) {
       return
     }
-    if (!stopwatch.value.startTime) {
-      stopwatch.value.startTime = Temporal.Now.instant().toString()
-    }
-    else {
-      stopwatch.value.startTime = Temporal.Now.instant().subtract(stopwatch.value.duration).toString()
-    }
-    frameRequestId = requestAnimationFrame(tick)
+    stopwatch.value.isStarted = true
+    timestamp = performance.now()
+    updateDuration()
+    intervalID = setInterval(updateDuration, 100)
   }
   function stop() {
-    stopwatch.value.duration = duration.value.toString()
-    clearFrameRequest()
+    if (!stopwatch.value.isStarted) {
+      return
+    }
+    clearIntervalRequest()
+    updateDuration()
+    stopwatch.value.duration = duration.value
+    stopwatch.value.isStarted = false
   }
   function reset() {
-    stopwatch.value.startTime = null
-    stopwatch.value.duration = Temporal.Duration.from({ seconds: 0 }).toString()
-    clearFrameRequest()
+    clearIntervalRequest()
+    stopwatch.value.isStarted = false
+    stopwatch.value.duration = 0
+    duration.value = 0
   }
-
-  const dateTimeFormatter = new Intl.DateTimeFormat(getAppLocale(), FORMATTER_OPTIONS)
-  const dateTimeWithHoursFormatter = new Intl.DateTimeFormat(getAppLocale(), {
-    ...FORMATTER_OPTIONS,
-    hour: '2-digit',
-  })
   const value = computed(() => {
-    const ms = duration.value.total({ unit: 'milliseconds' })
-    return duration.value.hours > 0 ? dateTimeWithHoursFormatter.format(ms) : dateTimeFormatter.format(ms)
+    const totalSeconds = Math.floor(duration.value / 1000)
+    const hours = Math.floor(totalSeconds / 3600)
+    const minutes = Math.floor((totalSeconds % 3600) / 60)
+    const seconds = totalSeconds % 60
+    const hh = String(hours).padStart(2, '0')
+    const mm = String(minutes).padStart(2, '0')
+    const ss = String(seconds).padStart(2, '0')
+    return hours > 0 ? `${hh}:${mm}:${ss}` : `${mm}:${ss}`
   })
-
-  onUnmounted(clearFrameRequest)
-  useEventListener('beforeunload', () => {
-    if (frameRequestId) {
-      stopwatch.value.duration = duration.value.toString()
-    }
+  watch(value, () => {
+    stopwatch.value.duration = duration.value
   })
+  if (stopwatch.value.isStarted) {
+    start()
+  }
 
   return {
     start,
@@ -80,4 +75,4 @@ export function useStopwatch() {
     reset,
     value,
   }
-}
+})
