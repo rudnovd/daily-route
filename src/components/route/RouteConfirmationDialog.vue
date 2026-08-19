@@ -4,24 +4,24 @@
     <div class="route-confirmation-dialog__route-data">
       <ul v-if="routePathSummaryFormatted" class="route-data-summary-list">
         <li class="route-data-summary-list__element">
-          <MdiMapMarkerDistanceIcon />
+          <Icon icon="mdi:map-marker-distance" />
           {{ $t('index.routeConfirmationDialog.distance') }}: ~{{ routePathSummaryFormatted.distance }}
         </li>
         <li class="route-data-summary-list__element">
-          <MdiTimerIcon />
+          <Icon icon="mdi:timer" />
           {{ $t('index.routeConfirmationDialog.duration') }}: ~{{ routePathSummaryFormatted.duration }}
         </li>
       </ul>
       <div v-if="isReady" class="route-data-buttons">
         <div>
           <button class="button-error icon-button icon-button--large" @click="cancelRoute">
-            <MdiCloseThickIcon />
+            <Icon icon="mdi:close-thick" />
           </button>
           {{ $t('index.routeConfirmationDialog.buttons.cancel') }}
         </div>
         <div>
           <button class="button-success icon-button icon-button--large" @click="acceptRoute">
-            <MdiCheckBoldIcon />
+            <Icon icon="mdi:check-bold" />
           </button>
           {{ $t('index.routeConfirmationDialog.buttons.accept') }}
         </div>
@@ -31,9 +31,10 @@
 </template>
 
 <script setup lang="ts">
+import { Icon } from '@iconify/vue'
 import { Marker } from '@maptiler/sdk'
 import { whenever } from '@vueuse/core'
-import { computed, defineAsyncComponent, nextTick, onUnmounted, useTemplateRef } from 'vue'
+import { computed, nextTick, onUnmounted, useTemplateRef } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { toast } from 'vue-sonner'
 import { useMap } from '@/composables/useMap'
@@ -41,11 +42,6 @@ import { getAppLocale } from '@/i18n'
 import { useRouteStore } from '@/stores/route'
 import { useUserStore } from '@/stores/user'
 import BaseDialog from '../BaseDialog.vue'
-
-const MdiCheckBoldIcon = defineAsyncComponent(() => import('~icons/mdi/check-bold'))
-const MdiCloseThickIcon = defineAsyncComponent(() => import('~icons/mdi/close-thick'))
-const MdiMapMarkerDistanceIcon = defineAsyncComponent(() => import('~icons/mdi/map-marker-distance'))
-const MdiTimerIcon = defineAsyncComponent(() => import('~icons/mdi/timer'))
 
 const model = defineModel<boolean>({ required: true })
 

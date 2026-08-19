@@ -9,17 +9,16 @@
       <span class="streak-calendar__day">{{ streakDate.plainDate.day }}</span>
       <span class="streak-calendar__month">{{ streakDate.formattedMonthString }}</span>
       <template v-if="streakDate.showStatus && streakDate.plainDate.until(now).days >= 0">
-        <MdiCheckBoldIcon v-if="streakDate.isCompleted" class="streak-calendar__icon color-success" />
-        <MdiCloseThickIcon v-else class="streak-calendar__icon color-error" />
+        <Icon v-if="streakDate.isCompleted" icon="mdi:ckeck-bold" class="streak-calendar__icon color-success" />
+        <Icon v-else icon="mdi:close-thick" class="streak-calendar__icon color-error" />
       </template>
     </li>
   </ul>
 </template>
 
 <script setup lang="ts">
+import { Icon } from '@iconify/vue'
 import { onMounted, onUnmounted, ref } from 'vue'
-import MdiCheckBoldIcon from '~icons/mdi/check-bold'
-import MdiCloseThickIcon from '~icons/mdi/close-thick'
 import { getAppLocale } from '@/i18n'
 import { useRouteStore } from '@/stores/route'
 import 'temporal-polyfill/global'

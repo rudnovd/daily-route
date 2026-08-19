@@ -16,10 +16,12 @@
 <script setup lang="ts">
 import { config as maptilerConfig } from '@maptiler/sdk'
 import { whenever } from '@vueuse/core'
-import { computed, defineAsyncComponent, onBeforeMount, onMounted, onUnmounted, ref } from 'vue'
+import { computed, onBeforeMount, onMounted, onUnmounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { toast, Toaster } from 'vue-sonner'
+import Navbar from './components/Navbar.vue'
+import NavigationHeader from './components/NavigationHeader.vue'
 import NoConnectionBadge from './components/NoConnectionBadge.vue'
 import { useOnboarding } from './composables/useOnboarding'
 import { IS_ONBOARDING_FINISHED_KEY } from './constants/onboarding'
@@ -28,33 +30,12 @@ import { useUserStore } from './stores/user'
 import { supabase } from './supabase'
 
 maptilerConfig.apiKey = import.meta.env.VITE_MAPTILER_API_KEY
-if (import.meta.env.VITE_IS_TAURI) {
-  import('./assets/styles/tauri.css')
-}
-else {
-  import('./assets/styles/web.css')
-}
-const NavigationHeader = defineAsyncComponent(() => import('./components/NavigationHeader.vue'))
-const Navbar = defineAsyncComponent(() => import('./components/Navbar.vue'))
+import.meta.env.VITE_IS_TAURI ? import('./assets/styles/tauri.css') : import('./assets/styles/web.css')
 
 const router = useRouter()
 const isTitleDisplayed = computed<boolean>(() => {
   return !!router.currentRoute.value.meta.title && !!router.currentRoute.value.meta.displayTitle
 })
-const userStore = useUserStore()
-const routeStore = useRouteStore()
-async function cancelExpiredRoute() {
-  if (!routeStore.lastRoute?.started_at) {
-    return
-  }
-  if (routeStore.lastRoute.status === 'started') {
-    const startedAt = Temporal.PlainDate.from(routeStore.lastRoute.started_at)
-    const now = Temporal.PlainDate.from(Temporal.Now.plainDateISO())
-    if (now.since(startedAt).days > 0) {
-      await routeStore.cancelRoute(routeStore.lastRoute.id)
-    }
-  }
-}
 const { t } = useI18n()
 async function exchangeCodeForSession(urlString: string) {
   const code = new URL(urlString).searchParams.get('code')
@@ -73,9 +54,6 @@ onBeforeMount(async () => {
   if (import.meta.env.VITE_IS_TAURI) {
     await exchangeCodeForSession(window.location.href)
     router.replace('/')
-  }
-  if (userStore.isAuthenticated) {
-    routeStore.getRoutes().then(cancelExpiredRoute)
   }
 })
 if (import.meta.env.VITE_IS_TAURI) {
@@ -109,12 +87,20 @@ onMounted(async () => {
     toast.error(router.currentRoute.value.query.error_description.toString())
   }
 })
+
+const userStore = useUserStore()
 supabase.auth.onAuthStateChange((_, session) => {
   userStore.user = session?.user ?? null
 })
-whenever(() => userStore.isAuthenticated, () => {
-  routeStore.getRoutes().then(cancelExpiredRoute)
-})
+
+const routeStore = useRouteStore()
+whenever(() => userStore.isAuthenticated, async () => {
+  await routeStore.getRoutes()
+  if (routeStore.lastRoute && (routeStore.lastRoute.status === 'generated' || routeStore.isStartedStatus(routeStore.lastRoute.status))) {
+    routeStore.state = routeStore.lastRoute
+    routeStore.calculateCurrentRoutePath()
+  }
+}, { immediate: true })
 </script>
 
 <style>

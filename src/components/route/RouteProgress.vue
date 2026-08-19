@@ -1,9 +1,9 @@
 <template>
   <div class="route-progress">
     <div class="route-progress__icons">
-      <MdiMapMarkerIcon class="color-accent" />
-      <MdiWalkIcon class="icon-walk" />
-      <MdiMapMarkerIcon class="color-success" />
+      <Icon icon="mdi:map-marker" class="color-accent" />
+      <Icon icon="mdi:walk" class="icon-walk" />
+      <Icon icon="mdi:map-marker" class="color-success" />
     </div>
     <div class="route-progress_progress">
       <progress :max="100" :value="displayedProgress" />
@@ -12,9 +12,8 @@
 </template>
 
 <script setup lang="ts">
+import { Icon } from '@iconify/vue'
 import { computed } from 'vue'
-import MdiMapMarkerIcon from '~icons/mdi/map-marker'
-import MdiWalkIcon from '~icons/mdi/walk'
 import { useRouteStore } from '@/stores/route'
 
 const routeStore = useRouteStore()

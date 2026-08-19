@@ -1,6 +1,6 @@
 <template>
   <section class="not-found-page">
-    <MdiMapMarkerOffOutlineIcon />
+    <Icon icon="mdi:map-marker-off-outline" />
     <span>{{ $t('notFound.index') }}</span>
     <router-link v-wave to="/" class="button-link button-primary">
       {{ $t('notFound.buttons.backToHome') }}
@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import MdiMapMarkerOffOutlineIcon from '~icons/mdi/map-marker-off-outline'
+import { Icon } from '@iconify/vue'
 
 definePage({ meta: { title: 'notFound.index', isNavbarHidden: true } })
 </script>

@@ -8,11 +8,11 @@
           @transitionstart="clear"
           @transitionend="emitTransitionEnd"
         >
-          <MdiWalkIcon />
+          <Icon icon="mdi:walk" />
           <div class="transition-container__element-road-container">
             <span class="transition-container__element-road" />
           </div>
-          <MdiMapMarkerIcon />
+          <Icon icon="mdi:map-marker-icon" />
         </div>
       </Transition>
     </div>
@@ -31,10 +31,9 @@
 </template>
 
 <script setup lang="ts">
+import { Icon } from '@iconify/vue'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import MdiMapMarkerIcon from '~icons/mdi/map-marker'
-import MdiWalkIcon from '~icons/mdi/walk'
 import { useUserStore } from '@/stores/user'
 
 defineOptions({ inheritAttrs: false })

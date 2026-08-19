@@ -8,7 +8,7 @@
           :alt="`${userStore.user?.user_metadata.name}'s avatar`"
           class="profile-user-data__img"
         >
-        <MdiAccountCircleIcon v-else class="profile-user-data__img" />
+        <Icon v-else icon="mdi:account-circle" class="profile-user-data__img" />
         <figcaption class="profile-user-data__name">
           {{ userStore.user?.user_metadata.name || $t('profile.anonymous') }}
         </figcaption>
@@ -35,9 +35,9 @@
 </template>
 
 <script setup lang="ts">
+import { Icon } from '@iconify/vue'
 import { ref } from 'vue'
 import { toast } from 'vue-sonner'
-import MdiAccountCircleIcon from '~icons/mdi/account-circle'
 import StreakCalendar from '@/components/profile/StreakCalendar.vue'
 import { useRouteStore } from '@/stores/route'
 import { useUserStore } from '@/stores/user'

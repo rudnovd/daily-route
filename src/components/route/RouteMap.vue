@@ -6,28 +6,28 @@
         class="icon-button icon-button--medium button-primary"
         @click="togglePathVisibility"
       >
-        <component :is="userStore.settings.isRoutePathVisible ? MdiEyeIcon : MdiEyeOffIcon" />
+        <Icon :icon="userStore.settings.isRoutePathVisible ? 'mdi:eye' : 'mdi:eye-off'" />
       </button>
     </header>
     <div ref="mapElement" class="route-map__element" />
     <div v-if="isReady" class="route-map__bottom-container">
       <div class="bottom-container__left-side">
         <div v-if="routeStore.daysStreak">
-          <MdiFireIcon />
+          <Icon icon="mdi:fire" />
           <span class="tabular-num">{{ routeStore.daysStreak }}</span>
         </div>
       </div>
       <div class="bottom-container__right-side">
         <div>
           <button v-wave class="icon-button icon-button--medium button-primary" @click="map?.zoomIn()">
-            <MdiPlusIcon />
+            <Icon icon="mdi:plus" />
           </button>
           <button v-wave class="icon-button icon-button--medium button-primary" @click="map?.zoomOut()">
-            <MdiMinusIcon />
+            <Icon icon="mdi:minus" />
           </button>
         </div>
         <button v-wave class="icon-button icon-button--medium button-primary geolocation-button" @click="moveMapToUserGeolocation">
-          <MdiNavigation />
+          <Icon icon="mdi:navigation" />
         </button>
       </div>
     </div>
@@ -37,16 +37,11 @@
 <script setup lang="ts">
 import type { GeoJSONSource } from '@maptiler/sdk'
 import type { Position } from 'geojson'
+import { Icon } from '@iconify/vue'
 import { Marker } from '@maptiler/sdk'
 import { distance, nearestPointOnLine, point } from '@turf/turf'
 import { useTimeoutPoll, whenever } from '@vueuse/core'
 import { onActivated, onDeactivated, useTemplateRef, watch } from 'vue'
-import MdiEyeIcon from '~icons/mdi/eye'
-import MdiEyeOffIcon from '~icons/mdi/eye-off'
-import MdiFireIcon from '~icons/mdi/fire'
-import MdiMinusIcon from '~icons/mdi/minus'
-import MdiNavigation from '~icons/mdi/navigation'
-import MdiPlusIcon from '~icons/mdi/plus'
 import { useGeolocation } from '@/composables/useGeolocation'
 import { useMap } from '@/composables/useMap'
 import { useRouteStore } from '@/stores/route'
@@ -84,9 +79,6 @@ whenever(isReady, async () => {
   if (userStore.dailyRouteStartPosition) {
     initStartMarker()
   }
-  if (routeStore.path) {
-    initFinishMarker()
-  }
 }, { once: true })
 let startMarker: Marker | null = null
 let finishMarker: Marker | null = null
@@ -120,6 +112,12 @@ function initFinishMarker() {
   }
   const [lng, lat] = routeStore.finishPosition
   finishMarker = new Marker({ color: '#22c55e' }).setLngLat([lng, lat]).addTo(map.value)
+}
+function removeFinishMarker() {
+  if (finishMarker) {
+    finishMarker.remove()
+    finishMarker = null
+  }
 }
 
 const GEOLOCATION_POINT_SOURCE_KEY = 'geolocation-point-source'
@@ -266,11 +264,21 @@ watch(
 )
 watch(() => routeStore.path, (path) => {
   if (!path) {
+    pauseUpdateRouteLine()
     removeRouteLine()
+    removeFinishMarker()
   }
-  const hasRouteLineLayer = !!map.value?.getLayer(ROUTE_LINE_LAYER_KEY)
-  if (!hasRouteLineLayer) {
-    initRouteLine()
+  else {
+    const hasRouteLineLayer = !!map.value?.getLayer(ROUTE_LINE_LAYER_KEY)
+    if (!hasRouteLineLayer) {
+      initRouteLine()
+      if (userStore.settings.isRoutePathVisible) {
+        resumeUpdateRouteLine()
+      }
+    }
+    if (!finishMarker) {
+      initFinishMarker()
+    }
   }
 }, { immediate: true })
 defineExpose({ isReady })

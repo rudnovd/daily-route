@@ -7,9 +7,9 @@
           :class="{ 'button-link--disabled': isLoading }"
           to="/settings/locale"
         >
-          <MdiTranslateIcon />
+          <Icon icon="mdi:translate" />
           <span class="settings-page__element-text">{{ $t('settings.locale.title') }}</span>
-          <MdiChevronRightIcon />
+          <Icon icon="mdi:chevron-right" />
         </router-link>
       </li>
       <li>
@@ -18,9 +18,9 @@
           :class="{ 'button-link--disabled': isLoading || !!routeStore.path }"
           to="/settings/edit?target=start"
         >
-          <MdiMapMarkerIcon />
+          <Icon icon="mdi:map-marker" />
           <span class="settings-page__element-text">{{ $t('settings.startPoint.title') }}</span>
-          <MdiChevronRightIcon />
+          <Icon icon="mdi:chevron-right" />
         </router-link>
       </li>
       <li>
@@ -29,9 +29,9 @@
           :class="{ 'button-link--disabled': isLoading || !!routeStore.path }"
           to="/settings/edit?target=radius"
         >
-          <MdiMapMarkerRadiusIcon />
+          <Icon icon="mdi:map-marker-radius" />
           <span class="settings-page__element-text">{{ $t('settings.radius.title') }}</span>
-          <MdiChevronRightIcon />
+          <Icon icon="mdi:chevron-right" />
         </router-link>
       </li>
       <li>
@@ -40,9 +40,9 @@
           :class="{ 'button-link--disabled': isLoading || !!routeStore.path }"
           to="/onboarding"
         >
-          <MdiSchoolIcon />
+          <Icon icon="mdi:school" />
           <span class="settings-page__element-text">{{ $t('settings.onboarding.title') }}</span>
-          <MdiChevronRightIcon />
+          <Icon icon="mdi:chevron-right" />
         </router-link>
       </li>
       <li v-if="userStore.user">
@@ -52,9 +52,9 @@
           class="settings-page__element"
           @transitionend="signOut"
         >
-          <MdiLogoutIcon />
+          <Icon icon="mdi:logout" />
           <span class="settings-page__element-text">{{ $t('settings.signOut.title') }}</span>
-          <MdiChevronRightIcon />
+          <Icon icon="mdi:chevron-right" />
         </ButtonTransitionIcon>
       </li>
     </ul>
@@ -75,16 +75,11 @@
 </template>
 
 <script setup lang="ts">
+import { Icon } from '@iconify/vue'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { toast } from 'vue-sonner'
-import MdiChevronRightIcon from '~icons/mdi/chevron-right'
-import MdiLogoutIcon from '~icons/mdi/logout'
-import MdiMapMarkerIcon from '~icons/mdi/map-marker'
-import MdiMapMarkerRadiusIcon from '~icons/mdi/map-marker-radius'
-import MdiSchoolIcon from '~icons/mdi/school'
-import MdiTranslateIcon from '~icons/mdi/translate'
 import ButtonTransitionIcon from '@/components/ButtonTransitionIcon.vue'
 import { useRouteStore } from '@/stores/route'
 import { useUserStore } from '@/stores/user'

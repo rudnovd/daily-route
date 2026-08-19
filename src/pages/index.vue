@@ -24,15 +24,15 @@
         <div class="completed-route__title">
           <template v-if="routeStore.lastRoute?.status === 'finished'">
             {{ $t('index.dailyRouteFinished') }}
-            <MdiCheckBoldIcon class="check-icon" />
+            <Icon icon="mdi:check-bold" class="check-icon" />
           </template>
           <template v-else-if="routeStore.lastRoute?.status === 'frozen'">
             {{ $t('index.dailyRouteFrozen') }}
-            <MdiSnowfallIcon class="snowfall-icon" />
+            <Icon icon="mdi:snowfall" class="snowfall-icon" />
           </template>
           <template v-else-if="routeStore.lastRoute?.status === 'canceled'">
             {{ $t('index.dailyRouteCanceled') }}
-            <MdiCloseThickIcon class="close-icon" />
+            <Icon icon="mdi:close-thick" class="close-icon" />
           </template>
         </div>
         <span>
@@ -41,9 +41,9 @@
       </div>
       <div v-else-if="isFarFromStartPoint" class="route__far-from-start-placeholder">
         <div class="walk-container">
-          <MdiWalkIcon />
+          <Icon icon="mdi:walk" />
           <span class="walk-container__road" />
-          <MdiMapMarkerIcon class="color-accent" />
+          <Icon icon="mdi:map-marker" class="color-accent" />
         </div>
         <span>
           {{ $t('index.tooFarFromStart') }}
@@ -81,6 +81,7 @@
 
 <script setup lang="ts">
 import type { UserRoute } from '@/types/route'
+import { Icon } from '@iconify/vue'
 import { LngLat } from '@maptiler/sdk'
 import { randomPoint } from '@turf/turf'
 import { whenever } from '@vueuse/core'
@@ -88,8 +89,6 @@ import { computed, defineAsyncComponent, ref, useTemplateRef, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { toast } from 'vue-sonner'
-import MdiMapMarkerIcon from '~icons/mdi/map-marker'
-import MdiWalkIcon from '~icons/mdi/walk'
 import { getUserRoutes } from '@/api/userRoute'
 import ButtonTransitionIcon from '@/components/ButtonTransitionIcon.vue'
 import RouteController from '@/components/route/RouteController.vue'
@@ -103,9 +102,6 @@ import { useUserStore } from '@/stores/user'
 
 definePage({ meta: { title: 'index.title', hideTopPadding: true } })
 
-const MdiCheckBoldIcon = defineAsyncComponent(() => import('~icons/mdi/check-bold'))
-const MdiCloseThickIcon = defineAsyncComponent(() => import('~icons/mdi/close-thick'))
-const MdiSnowfallIcon = defineAsyncComponent(() => import('~icons/mdi/snowflake'))
 const RouteConfirmationDialog = defineAsyncComponent(() => import('@/components/route/RouteConfirmationDialog.vue'))
 
 const routeStore = useRouteStore()

@@ -7,7 +7,7 @@
           class="icon-button icon-button--medium button-primary"
           @click="moveMapToUserGeolocation"
         >
-          <MdiNavigation />
+          <Icon icon="mdi:navigation" />
         </button>
       </div>
       <div ref="mapElement" class="map" data-onboarding-element="map-container" />
@@ -30,6 +30,7 @@
 <script setup lang="ts">
 import type { GeoJSONSource, Subscription } from '@maptiler/sdk'
 import type { BBox } from 'geojson'
+import { Icon } from '@iconify/vue'
 import { Marker } from '@maptiler/sdk'
 import { bbox, circle, distance, point } from '@turf/turf'
 import { whenever } from '@vueuse/core'
@@ -37,7 +38,6 @@ import { computed, ref, useTemplateRef, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { toast } from 'vue-sonner'
-import MdiNavigation from '~icons/mdi/navigation'
 import { useGeolocation } from '@/composables/useGeolocation'
 import { useMap } from '@/composables/useMap'
 import { IS_ONBOARDING_FINISHED_KEY } from '@/constants/onboarding'
