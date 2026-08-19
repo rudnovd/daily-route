@@ -1,5 +1,9 @@
 name: build android apk
 
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 on:
   release:
     types: [published]
