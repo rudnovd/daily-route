@@ -16,10 +16,12 @@
 <script setup lang="ts">
 import { config as maptilerConfig } from '@maptiler/sdk'
 import { whenever } from '@vueuse/core'
-import { computed, defineAsyncComponent, onBeforeMount, onMounted, onUnmounted, ref } from 'vue'
+import { computed, onBeforeMount, onMounted, onUnmounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { toast, Toaster } from 'vue-sonner'
+import Navbar from './components/Navbar.vue'
+import NavigationHeader from './components/NavigationHeader.vue'
 import NoConnectionBadge from './components/NoConnectionBadge.vue'
 import { useOnboarding } from './composables/useOnboarding'
 import { IS_ONBOARDING_FINISHED_KEY } from './constants/onboarding'
@@ -28,14 +30,7 @@ import { useUserStore } from './stores/user'
 import { supabase } from './supabase'
 
 maptilerConfig.apiKey = import.meta.env.VITE_MAPTILER_API_KEY
-if (import.meta.env.VITE_IS_TAURI) {
-  import('./assets/styles/tauri.css')
-}
-else {
-  import('./assets/styles/web.css')
-}
-const NavigationHeader = defineAsyncComponent(() => import('./components/NavigationHeader.vue'))
-const Navbar = defineAsyncComponent(() => import('./components/Navbar.vue'))
+import.meta.env.VITE_IS_TAURI ? import('./assets/styles/tauri.css') : import('./assets/styles/web.css')
 
 const router = useRouter()
 const isTitleDisplayed = computed<boolean>(() => {
