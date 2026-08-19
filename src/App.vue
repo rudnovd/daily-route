@@ -36,20 +36,6 @@ const router = useRouter()
 const isTitleDisplayed = computed<boolean>(() => {
   return !!router.currentRoute.value.meta.title && !!router.currentRoute.value.meta.displayTitle
 })
-const userStore = useUserStore()
-const routeStore = useRouteStore()
-async function cancelExpiredRoute() {
-  if (!routeStore.lastRoute?.started_at) {
-    return
-  }
-  if (routeStore.lastRoute.status === 'started') {
-    const startedAt = Temporal.PlainDate.from(routeStore.lastRoute.started_at)
-    const now = Temporal.PlainDate.from(Temporal.Now.plainDateISO())
-    if (now.since(startedAt).days > 0) {
-      await routeStore.cancelRoute(routeStore.lastRoute.id)
-    }
-  }
-}
 const { t } = useI18n()
 async function exchangeCodeForSession(urlString: string) {
   const code = new URL(urlString).searchParams.get('code')
@@ -68,9 +54,6 @@ onBeforeMount(async () => {
   if (import.meta.env.VITE_IS_TAURI) {
     await exchangeCodeForSession(window.location.href)
     router.replace('/')
-  }
-  if (userStore.isAuthenticated) {
-    routeStore.getRoutes().then(cancelExpiredRoute)
   }
 })
 if (import.meta.env.VITE_IS_TAURI) {
@@ -104,12 +87,20 @@ onMounted(async () => {
     toast.error(router.currentRoute.value.query.error_description.toString())
   }
 })
+
+const userStore = useUserStore()
 supabase.auth.onAuthStateChange((_, session) => {
   userStore.user = session?.user ?? null
 })
-whenever(() => userStore.isAuthenticated, () => {
-  routeStore.getRoutes().then(cancelExpiredRoute)
-})
+
+const routeStore = useRouteStore()
+whenever(() => userStore.isAuthenticated, async () => {
+  await routeStore.getRoutes()
+  if (routeStore.lastRoute && (routeStore.lastRoute.status === 'generated' || routeStore.isStartedStatus(routeStore.lastRoute.status))) {
+    routeStore.state = routeStore.lastRoute
+    routeStore.calculateCurrentRoutePath()
+  }
+}, { immediate: true })
 </script>
 
 <style>
