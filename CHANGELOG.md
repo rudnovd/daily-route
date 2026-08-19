@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.6.0](https://github.com/rudnovd/daily-route/compare/v0.5.0...v0.6.0) (2026-08-19)
+
+
+### Features
+
+* **RouteMap:** handle route path in watcher ([33201e9](https://github.com/rudnovd/daily-route/commit/33201e968ea46c29dbaad51c52a613198ee27515))
+* use @iconify/vue instead unplugin-icons ([a5ba043](https://github.com/rudnovd/daily-route/commit/a5ba0431a776546d34ffe0119a0ab8cb804216bc))
+
+
+### Bug Fixes
+
+* **locales:** fix units tokens ([bfcb95b](https://github.com/rudnovd/daily-route/commit/bfcb95b8c2903d84571ee6f0f7c12764daf5558b))
+* **route:** update route data handling ([1278ac8](https://github.com/rudnovd/daily-route/commit/1278ac87a21411de4f4ec3312b2c0f73901f83ed))
+
 ## [0.5.0](https://github.com/rudnovd/daily-route/compare/v0.4.0...v0.5.0) (2026-08-17)
 
 
