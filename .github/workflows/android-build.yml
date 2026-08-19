@@ -68,7 +68,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tagName: v__VERSION__
+          releaseId: ${{ github.event.release.id }}
           releaseAssetNamePattern: '[mainBinaryName]-[version][ext]'
           args: --apk
           mobile: android
