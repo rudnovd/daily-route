@@ -50,7 +50,7 @@ export const useRouteStore = defineStore('route', {
       if (!this.lastRoute) {
         return false
       }
-      const now = Temporal.PlainDate.from(Temporal.Now.plainDateTimeISO())
+      const now = Temporal.PlainDate.from(Temporal.Now.plainDateTimeISO('UTC'))
       const lastRouteDate = Temporal.PlainDate.from(this.lastRoute.created_at)
       if (lastRouteDate.until(now).days > 0) {
         return false
@@ -99,7 +99,7 @@ export const useRouteStore = defineStore('route', {
     },
     async createRoute(route: Partial<UserRoute>) {
       const newRoute = await createUserRoute(route)
-      this.routes.push(newRoute)
+      this.routes.unshift(newRoute)
       this.state = newRoute
       return this.state
     },
@@ -113,7 +113,7 @@ export const useRouteStore = defineStore('route', {
       }
       this.path = await getRoutePath(this.routes[routeIndex].start_geometry, this.routes[routeIndex].finish_geometry)
       const startedRoute = await startUserRoute(routeId)
-      this.routes[routeIndex] = startedRoute
+      this.routes.splice(routeIndex, 1, startedRoute)
       this.state = startedRoute
     },
     async cancelRoute(routeId: UserRoute['id']) {
@@ -126,8 +126,7 @@ export const useRouteStore = defineStore('route', {
         throw new Error(`Cannot cancel with status ${this.routes[routeIndex].status}`)
       }
       const canceledRoute = await cancelUserRoute(this.routes[routeIndex].id)
-      this.routes[routeIndex] = canceledRoute
-      this.getRoutes()
+      this.routes.splice(routeIndex, 1, canceledRoute)
       this.path = null
       this.state = null
     },
@@ -137,7 +136,7 @@ export const useRouteStore = defineStore('route', {
         throw new Error('Route not found')
       }
       const finishedRoute = await finishUserRoute(routeId)
-      this.routes[routeIndex] = finishedRoute
+      this.routes.splice(routeIndex, 1, finishedRoute)
       this.state = null
       this.path = null
     },
@@ -150,7 +149,7 @@ export const useRouteStore = defineStore('route', {
         throw new Error(`Cannot pause with status ${this.routes[routeIndex].status}`)
       }
       const pausedRoute = await pauseUserRoute(routeId)
-      this.routes[routeIndex] = pausedRoute
+      this.routes.splice(routeIndex, 1, pausedRoute)
       this.state = pausedRoute
     },
     async unpauseRoute(routeId: UserRoute['id']) {
@@ -162,7 +161,7 @@ export const useRouteStore = defineStore('route', {
         throw new Error(`Cannot unpause with status ${this.routes[routeIndex].status}`)
       }
       const unpausedRoute = await unpauseUserRoute(routeId)
-      this.routes[routeIndex] = unpausedRoute
+      this.routes.splice(routeIndex, 1, unpausedRoute)
       this.state = unpausedRoute
     },
     async calculateCurrentRoutePath(): Promise<FeatureCollection<LineString>> {
