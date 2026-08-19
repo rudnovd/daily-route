@@ -1,7 +1,7 @@
 {
   "name": "daily-route",
   "type": "module",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "private": true,
   "packageManager": "pnpm@11.21.0",
   "devEngines": {
