@@ -1,9 +1,9 @@
 {
   "units": {
-    "meters": "метр | {n} метра | {n} метров",
-    "kilometes": "километр | {n} километра | {n} километров",
-    "metersShort": "м",
-    "kilometersShort": "км"
+    "meters": "meter | {n} meters",
+    "kilometes": "kilometer | {n} kilometers",
+    "metersShort": "m",
+    "kilometersShort": "km"
   },
   "app": {
     "noConnection": "No connection"
