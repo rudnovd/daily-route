@@ -9,7 +9,7 @@
       <span class="streak-calendar__day">{{ streakDate.plainDate.day }}</span>
       <span class="streak-calendar__month">{{ streakDate.formattedMonthString }}</span>
       <template v-if="streakDate.showStatus && streakDate.plainDate.until(now).days >= 0">
-        <Icon v-if="streakDate.isCompleted" icon="mdi:ckeck-bold" class="streak-calendar__icon color-success" />
+        <Icon v-if="streakDate.isCompleted" icon="mdi:check-bold" class="streak-calendar__icon color-success" />
         <Icon v-else icon="mdi:close-thick" class="streak-calendar__icon color-error" />
       </template>
     </li>

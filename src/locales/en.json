@@ -1,7 +1,7 @@
 {
   "units": {
-    "meters": "meter | {n} meters",
-    "kilometes": "kilometer | {n} kilometers",
+    "meters": "meter | meters",
+    "kilometers": "kilometer | kilometers",
     "metersShort": "m",
     "kilometersShort": "km"
   },
@@ -30,6 +30,9 @@
     "dailyRouteFrozen": "Today's daily route is frozen",
     "dailyRouteCanceled": "Today's daily route has been cancelled",
     "comeBackTomorrow": "Come back tomorrow",
+    "scanQr": "The app is supported only on mobile devices. Scan the QR code or to continue",
+    "distanceToFinish": "{distance} to finish",
+    "nearFinish": "You're near the finish line",
     "routeConfirmationDialog": {
       "distance": "Distance",
       "duration": "Duration",

@@ -2,7 +2,8 @@
   <section class="index-page">
     <RouteMap ref="mapElement" />
     <div class="route">
-      <WalkerLoading v-if="isMapLoading" class="route__placeholder">
+      <QrElement v-if="!isMobile && isOnboardingFinished && isStartButtonAvailable" class="route__placeholder" />
+      <WalkerLoading v-else-if="isMapLoading" class="route__placeholder">
         {{ $t('index.loadingMap') }}...
       </WalkerLoading>
       <WalkerLoading v-else-if="isDailyRouteGenerating" class="route__placeholder">
@@ -97,12 +98,17 @@ import RouteProgress from '@/components/route/RouteProgress.vue'
 import WalkerLoading from '@/components/WalkerLoading.vue'
 import { useGeolocation } from '@/composables/useGeolocation'
 import { useStopwatch } from '@/composables/useStopwatch'
+import { IS_ONBOARDING_FINISHED_KEY } from '@/constants/onboarding'
 import { useRouteStore } from '@/stores/route'
 import { useUserStore } from '@/stores/user'
 
 definePage({ meta: { title: 'index.title', hideTopPadding: true } })
 
 const RouteConfirmationDialog = defineAsyncComponent(() => import('@/components/route/RouteConfirmationDialog.vue'))
+const QrElement = defineAsyncComponent(() => import('@/components/QrElement.vue'))
+
+const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent)
+const isOnboardingFinished = localStorage.getItem(IS_ONBOARDING_FINISHED_KEY) === 'true'
 
 const routeStore = useRouteStore()
 const mapRef = useTemplateRef('mapElement')
@@ -234,6 +240,7 @@ watch(() => routeStore.status, (newStatus) => {
   }
   .route__placeholder {
     align-items: center;
+    text-wrap-style: pretty;
     .button-link {
       width: 100%;
     }

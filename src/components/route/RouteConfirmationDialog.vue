@@ -86,9 +86,9 @@ onUnmounted(() => {
 const { t } = useI18n()
 function formatDistance(distance: number) {
   if (distance < 1000) {
-    return `${distance} ${t('units.metersShort')}`
+    return `${distance.toFixed(0)} ${t('units.metersShort')}`
   }
-  return `${(distance / 1000).toPrecision(2)} ${t('units.kilometersShort')}`
+  return `${(distance / 1000).toFixed(1)} ${t('units.kilometersShort')}`
 }
 function formatDuration(seconds: number) {
   const hours = Math.floor(seconds / 3600)
@@ -156,7 +156,7 @@ async function acceptRoute() {
 
 <style>
 .route-confirmation-dialog {
-  height: 70dvh;
+  min-height: 50dvh;
   .base-dialog__content {
     display: grid;
     grid-template-rows: 1fr 1fr;

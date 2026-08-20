@@ -123,6 +123,9 @@ ul {
 .color-accent {
   color: var(--color-accent);
 }
+.color-secondary {
+  color: var(--color-text-secondary);
+}
 .tabular-num {
   font-weight: 700;
   font-variant-numeric: tabular-nums;

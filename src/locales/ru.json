@@ -1,7 +1,7 @@
 {
   "units": {
-    "meters": "метр | {n} метра | {n} метров",
-    "kilometes": "километр | {n} километра | {n} километров",
+    "meters": "метр | метра | метров",
+    "kilometers": "километр | километра | километров",
     "metersShort": "м",
     "kilometersShort": "км"
   },
@@ -30,6 +30,9 @@
     "dailyRouteFrozen": "Ежедневный маршрут заморожен",
     "dailyRouteCanceled": "Ежедневный маршрут отменён",
     "comeBackTomorrow": "Возвращайтесь завтра",
+    "scanQr": "Приложение поддерживается только на мобильных устройствах. Для продолжения отсканируйте QR-код",
+    "distanceToFinish": "{distance} до фишина",
+    "nearFinish": "Вы у финиша",
     "routeConfirmationDialog": {
       "distance": "Дистанция",
       "duration": "Продолжительность",

@@ -42,7 +42,7 @@ const onboarding = useOnboarding()
   }
   p {
     margin: 0;
-    text-wrap-style: balance;
+    text-wrap-style: pretty;
     span {
       font-weight: bold;
       color: var(--color-accent);

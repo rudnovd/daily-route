@@ -61,13 +61,13 @@
     <div class="settings-page__footer">
       <a
         v-if="!VITE_IS_TAURI"
-        class="color-accent"
+        class="color-accent app-link"
         href="https://github.com/rudnovd/daily-route/releases/latest"
         target="_blank"
       >
         {{ $t('settings.androidApp') }}
       </a>
-      <a href="https://github.com/rudnovd/daily-route" class="version">
+      <a href="https://github.com/rudnovd/daily-route" class="color-secondary version">
         {{ VITE_APP_VERSION }} ({{ VITE_GIT_COMMIT_SHA }})
       </a>
     </div>
@@ -150,9 +150,9 @@ async function signOut(): Promise<void> {
     display: grid;
     gap: 0.5rem;
     justify-content: center;
-    a {
+    .app-link,
+    .version {
       font-weight: 700;
-      text-decoration: underline;
     }
     .version {
       font-size: 0.8rem;
