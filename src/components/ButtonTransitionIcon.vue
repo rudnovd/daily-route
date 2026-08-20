@@ -19,6 +19,7 @@
     <button
       v-wave
       v-bind="$attrs"
+      class="button-transition-icon__button"
       @pointerdown="startButtonTransition"
       @pointerup="stopButtonTransition"
       @pointercancel="stopButtonTransition"
@@ -26,6 +27,7 @@
       @contextmenu.prevent
     >
       <slot />
+      <Icon icon="mdi:gesture-tap-hold" class="tap-hold-icon" />
     </button>
   </div>
 </template>
@@ -96,6 +98,21 @@ function emitTransitionEnd() {
   }
   .transition-container__element-road {
     border-bottom: calc(var(--size) / 5) dotted var(--color-text);
+  }
+  .button-transition-icon__button {
+    position: relative;
+    width: 100%;
+    transition: transform 0.5s;
+    &:active {
+      transform: scale(0.98);
+    }
+    .tap-hold-icon {
+      position: absolute;
+      right: 2px;
+      bottom: 2px;
+      width: 1em;
+      height: 1em;
+    }
   }
   .walk-enter-active {
     &.transition-container__element {

@@ -10,10 +10,12 @@
     @contextmenu.prevent
   >
     <slot />
+    <Icon icon="mdi:gesture-tap-hold" class="tap-hold-icon" />
   </button>
 </template>
 
 <script setup lang="ts">
+import { Icon } from '@iconify/vue'
 import { useTemplateRef } from 'vue'
 
 const emit = defineEmits<{ animationend: [] }>()
@@ -57,15 +59,25 @@ function stopTransition(event: PointerEvent) {
   }
 }
 .button-transition-border {
+  position: relative;
   border: 4px solid transparent;
-  transition: scale 1s;
+  transition: transform 0.5s;
+  &:active {
+    transform: scale(0.98);
+  }
+  .tap-hold-icon {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 1em;
+    height: 1em;
+  }
   &.border-animation {
     color: oklch(100% 0 0deg);
     background:
       linear-gradient(var(--color-error), var(--color-error)) padding-box,
       conic-gradient(var(--color-accent) var(--gradient-angle), transparent calc(var(--gradient-angle) - 180deg))
         border-box;
-    scale: 1.2;
     animation: change-gradient-angle var(--duration-long) linear;
   }
 }
