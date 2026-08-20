@@ -7,22 +7,30 @@
     @close="close"
     @cancel="cancel"
   >
-    <header v-if="title || closable" class="base-dialog__header">
+    <header v-if="title && closable" class="base-dialog__header">
       <slot name="header">
         <h2 v-if="title">
           {{ title }}
         </h2>
       </slot>
       <button
+        v-if="title && closable"
+        type="button"
+        class="base-dialog__close-button"
+        @click="close"
+      >
+        <Icon icon="mdi:close" />
+      </button>
+    </header>
+    <div class="base-dialog__content">
+      <button
         v-if="closable"
         type="button"
         class="base-dialog__close-button"
         @click="close"
       >
-        ×
+        <Icon icon="mdi:close" />
       </button>
-    </header>
-    <div class="base-dialog__content">
       <slot />
     </div>
     <footer v-if="$slots.footer" class="base-dialog__footer">
@@ -32,6 +40,7 @@
 </template>
 
 <script setup lang="ts">
+import { Icon } from '@iconify/vue'
 import { nextTick, useTemplateRef, watch } from 'vue'
 
 interface Props {
@@ -89,7 +98,7 @@ watch(model, async (open) => {
     margin: 0;
   }
   &::backdrop {
-    background: rgb(0 0 0 / 50%);
+    background-color: oklch(from black l c h / 60%);
   }
   .base-dialog__header {
     display: flex;
@@ -102,10 +111,8 @@ watch(model, async (open) => {
     }
   }
   .base-dialog__close-button {
-    font-size: 24px;
-    cursor: pointer;
-    background: transparent;
-    border: 0;
+    margin-left: auto;
+    font-size: 1.2rem;
   }
   .base-dialog__content {
     padding: var(--content-padding-inline);
