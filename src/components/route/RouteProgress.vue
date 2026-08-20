@@ -5,8 +5,11 @@
       <Icon icon="mdi:walk" class="icon-walk" />
       <Icon icon="mdi:map-marker" class="color-success" />
     </div>
-    <div class="route-progress_progress">
+    <div class="route-progress-progress-element">
       <progress :max="100" :value="displayedProgress" />
+    </div>
+    <div class="route-progress-finish-distance">
+      {{ distanceToFinish }}
     </div>
   </div>
 </template>
@@ -14,6 +17,7 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRouteStore } from '@/stores/route'
 
 const routeStore = useRouteStore()
@@ -23,6 +27,17 @@ const displayedProgress = computed<number>(() => {
     return 100
   }
   return routeStore.completedPercent
+})
+const { t } = useI18n()
+const distanceToFinish = computed<string>(() => {
+  if (routeStore.completedPercent >= 90) {
+    return `${t('index.nearFinish')}🏁`
+  }
+  const distance = routeStore.currentDistance < 1000 ? routeStore.currentDistance : routeStore.currentDistance / 1000
+  if (routeStore.currentDistance < 1000) {
+    return `${Math.floor(distance)} ${t('index.distanceToFinish', { distance: t('units.meters', Math.floor(distance)) })}`
+  }
+  return `${distance.toFixed(1)} ${t('index.distanceToFinish', { distance: t('units.kilometers', Number(distance.toFixed(0))) })}`
 })
 </script>
 
@@ -38,11 +53,14 @@ const displayedProgress = computed<number>(() => {
       --displayed-progress: v-bind('`${displayedProgress}vw`');
     }
   }
-  .route-progress_progress {
+  .route-progress-progress-element {
     padding-inline: 0.75rem;
     progress {
       inline-size: 100%;
     }
+  }
+  .route-progress-finish-distance {
+    text-align: center;
   }
 }
 </style>
