@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.7.0](https://github.com/rudnovd/daily-route/compare/v0.6.0...v0.7.0) (2026-08-20)
+
+
+### Features
+
+* **BaseDialog:** update styles ([59f3550](https://github.com/rudnovd/daily-route/commit/59f3550816e25525643b4bee5a99436e1ea5eafb))
+* **buttons:** add icon for held buttons ([85b7c6d](https://github.com/rudnovd/daily-route/commit/85b7c6d39b618bc30674d74e114d786a6cc50690))
+* **index:** add qr code for desktop ([03bc132](https://github.com/rudnovd/daily-route/commit/03bc132d94d74ce1e25a4e6e7a9d029f16f076a3))
+* **RouteProgress:** display distance to finish ([cb060c9](https://github.com/rudnovd/daily-route/commit/cb060c911e95f55d1c46d24f8047a5ac3f77d28b))
+
+
+### Bug Fixes
+
+* **ButtonTransitionIcon:** fix wrong icon name ([2db54bb](https://github.com/rudnovd/daily-route/commit/2db54bb7225a4d14cc5c2b12cac417682ab3c571))
+* **onboarding-page:** add `text-wrap-style: pretty` for paragraphs ([8ada2ec](https://github.com/rudnovd/daily-route/commit/8ada2ec29c945c1806dae1d600c9ae1814c219c5))
+* **RouteConfirmationDialog:** update styles, update format function ([d8622e6](https://github.com/rudnovd/daily-route/commit/d8622e652b7e954b5d9215ec0abe952e57792bc1))
+* **settings-page:** update version link style ([1aaf934](https://github.com/rudnovd/daily-route/commit/1aaf9349aa359e3b9cfe7892c7d84b06ca1b2a67))
+* **StreakCalender:** fix wrong icon name ([cc97f48](https://github.com/rudnovd/daily-route/commit/cc97f48065d56b9e039bb4090a66b9bfb028d481))
+
 ## [0.6.0](https://github.com/rudnovd/daily-route/compare/v0.5.0...v0.6.0) (2026-08-19)
 
 
