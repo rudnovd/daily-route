@@ -12,7 +12,7 @@
           <div class="transition-container__element-road-container">
             <span class="transition-container__element-road" />
           </div>
-          <Icon icon="mdi:map-marker-icon" />
+          <Icon icon="mdi:map-marker" />
         </div>
       </Transition>
     </div>
