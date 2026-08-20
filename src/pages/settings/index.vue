@@ -150,7 +150,8 @@ async function signOut(): Promise<void> {
     display: grid;
     gap: 0.5rem;
     justify-content: center;
-    .app-link, .version {
+    .app-link,
+    .version {
       font-weight: 700;
     }
     .version {

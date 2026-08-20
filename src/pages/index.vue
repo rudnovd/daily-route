@@ -2,7 +2,7 @@
   <section class="index-page">
     <RouteMap ref="mapElement" />
     <div class="route">
-      <QrElement class="route__placeholder" v-if="!isMobile && isOnboardingFinished && isStartButtonAvailable" />
+      <QrElement v-if="!isMobile && isOnboardingFinished && isStartButtonAvailable" class="route__placeholder" />
       <WalkerLoading v-else-if="isMapLoading" class="route__placeholder">
         {{ $t('index.loadingMap') }}...
       </WalkerLoading>
