@@ -4,24 +4,24 @@
     <div class="route-confirmation-dialog__route-data">
       <ul v-if="routePathSummaryFormatted" class="route-data-summary-list">
         <li class="route-data-summary-list__element">
-          <Icon icon="mdi:map-marker-distance" />
+          <IconMapMarkerDistance />
           {{ $t('index.routeConfirmationDialog.distance') }}: ~{{ routePathSummaryFormatted.distance }}
         </li>
         <li class="route-data-summary-list__element">
-          <Icon icon="mdi:timer" />
+          <IconTimer />
           {{ $t('index.routeConfirmationDialog.duration') }}: ~{{ routePathSummaryFormatted.duration }}
         </li>
       </ul>
       <div v-if="isReady" class="route-data-buttons">
         <div>
           <button class="button-error icon-button icon-button--large" @click="cancelRoute">
-            <Icon icon="mdi:close-thick" />
+            <IconCloseThick />
           </button>
           {{ $t('index.routeConfirmationDialog.buttons.cancel') }}
         </div>
         <div>
           <button class="button-success icon-button icon-button--large" @click="acceptRoute">
-            <Icon icon="mdi:check-bold" />
+            <IconCheckBold />
           </button>
           {{ $t('index.routeConfirmationDialog.buttons.accept') }}
         </div>
@@ -31,12 +31,15 @@
 </template>
 
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
 import { Marker } from '@maptiler/sdk'
 import { whenever } from '@vueuse/core'
 import { computed, nextTick, onUnmounted, useTemplateRef } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { toast } from 'vue-sonner'
+import IconCheckBold from '~icons/mdi/check-bold'
+import IconCloseThick from '~icons/mdi/close-thick'
+import IconMapMarkerDistance from '~icons/mdi/map-marker-distance'
+import IconTimer from '~icons/mdi/timer'
 import { useMap } from '@/composables/useMap'
 import { getAppLocale } from '@/i18n'
 import { useRouteStore } from '@/stores/route'

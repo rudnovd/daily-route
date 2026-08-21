@@ -6,7 +6,7 @@
         class="icon-button icon-button--large button-primary"
         @animationend="cancelRoute"
       >
-        <Icon icon="mdi:stop" @click.prevent />
+        <IconStop @click.prevent />
       </ButtonTransitionBorder>
       {{ $t('index.buttons.cancel') }}
     </div>
@@ -17,7 +17,7 @@
         class="icon-button icon-button--large button-primary"
         @click="pauseRoute"
       >
-        <Icon icon="mdi:pause" />
+        <IconPause />
       </button>
       {{ $t('index.buttons.pause') }}
     </div>
@@ -28,7 +28,7 @@
         class="icon-button icon-button--large button-primary"
         @click="unpauseRoute"
       >
-        <Icon icon="mdi:play" />
+        <IconPlay />
       </button>
       {{ $t('index.buttons.continue') }}
     </div>
@@ -36,10 +36,12 @@
 </template>
 
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { toast } from 'vue-sonner'
+import IconPause from '~icons/mdi/pause'
+import IconPlay from '~icons/mdi/play'
+import IconStop from '~icons/mdi/stop'
 import { useRouteStore } from '@/stores/route'
 import { useUserStore } from '@/stores/user'
 import ButtonTransitionBorder from '../ButtonTransitionBorder.vue'

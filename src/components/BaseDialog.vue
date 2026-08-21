@@ -19,7 +19,7 @@
         class="base-dialog__close-button"
         @click="close"
       >
-        <Icon icon="mdi:close" />
+        <IconClose />
       </button>
     </header>
     <div class="base-dialog__content">
@@ -29,7 +29,7 @@
         class="base-dialog__close-button"
         @click="close"
       >
-        <Icon icon="mdi:close" />
+        <IconClose />
       </button>
       <slot />
     </div>
@@ -40,8 +40,8 @@
 </template>
 
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
 import { nextTick, useTemplateRef, watch } from 'vue'
+import IconClose from '~icons/mdi/close'
 
 interface Props {
   title?: string

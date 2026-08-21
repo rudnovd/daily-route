@@ -6,6 +6,7 @@
     "moduleResolution": "bundler",
     "paths": { "@/*": ["./src/*"] },
     "resolveJsonModule": true,
+    "types": ["unplugin-icons/types/vue"],
     "importHelpers": true,
     "noEmit": true,
     "removeComments": true,

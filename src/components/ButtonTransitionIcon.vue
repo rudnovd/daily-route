@@ -8,11 +8,11 @@
           @transitionstart="clear"
           @transitionend="emitTransitionEnd"
         >
-          <Icon icon="mdi:walk" />
+          <IconWalk />
           <div class="transition-container__element-road-container">
             <span class="transition-container__element-road" />
           </div>
-          <Icon icon="mdi:map-marker" />
+          <IconMapMarker />
         </div>
       </Transition>
     </div>
@@ -27,15 +27,18 @@
       @contextmenu.prevent
     >
       <slot />
-      <Icon icon="mdi:gesture-tap-hold" class="tap-hold-icon" />
+      <IconGestureTapHold class="tap-hold-icon" />
     </button>
   </div>
 </template>
 
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import IconGestureTapHold from '~icons/mdi/gesture-tap-hold'
+import IconMapMarker from '~icons/mdi/map-marker'
+import IconWalk from '~icons/mdi/walk'
+
 import { useUserStore } from '@/stores/user'
 
 defineOptions({ inheritAttrs: false })

@@ -114,6 +114,9 @@ ul {
   margin: 0;
   list-style: none;
 }
+.color-primary {
+  color: var(--color-primary);
+}
 .color-success {
   color: var(--color-success);
 }

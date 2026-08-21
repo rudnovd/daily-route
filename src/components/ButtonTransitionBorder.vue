@@ -10,13 +10,13 @@
     @contextmenu.prevent
   >
     <slot />
-    <Icon icon="mdi:gesture-tap-hold" class="tap-hold-icon" />
+    <IconGestureTapHold class="tap-hold-icon" />
   </button>
 </template>
 
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
 import { useTemplateRef } from 'vue'
+import IconGestureTapHold from '~icons/mdi/gesture-tap-hold'
 
 const emit = defineEmits<{ animationend: [] }>()
 
