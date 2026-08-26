@@ -115,7 +115,7 @@
     "steps": [
       { "title": "Starting point", "description": "Drag the map to select a starting point. The route will be generated from this point" },
       { "description": "Save the starting point" },
-      { "title": "Radius", "description": "Zoom in or out on the map to change the radius. The route waypoint will be generated within the selected radius" },
+      { "title": "Radius", "description": "Select one of the radius options or enter your own. The route waypoint will be generated within the selected radius" },
       { "description": "Save the radius" },
       { "description": "When you’re ready to start your route, press and hold the ‘Start daily route’ button. You can only complete the daily route once a day." }
     ]
