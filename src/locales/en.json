@@ -1,4 +1,7 @@
 {
+  "common": {
+    "save": "Save"
+  },
   "units": {
     "meters": "meter | meters",
     "kilometers": "kilometer | kilometers",
@@ -56,17 +59,15 @@
     },
     "startPoint": {
       "title": "Start Point",
-      "saved": "Start point saved",
-      "buttons": {
-        "saveStart": "Save point"
-      }
+      "dragMapToSelectStartPoint": "Drag the map to select a starting point",
+      "saved": "Start point saved"
     },
     "radius": {
-      "title": "Radius",
-      "meters": "Meters",
+      "selectRadius": "Select a radius for generating a random point for the daily route",
+      "zoomToSelectRadius": "Zoom in or out on the map to change the radius",
       "saved": "Radius saved",
       "buttons": {
-        "saveRadius": "Save radius"
+        "selectRadius": "Select radius"
       }
     },
     "onboarding": {
