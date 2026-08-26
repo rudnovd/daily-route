@@ -66,7 +66,8 @@
           {{ $t('settings.signOut.dialog.buttons.stay') }}
         </button>
         <button
-          v-wave class="button-primary"
+          v-wave
+          class="button-primary"
           :disabled="isLoading || !userStore.isOnline"
           @click="signOut"
         >
@@ -130,7 +131,7 @@ async function signOut(): Promise<void> {
 
 const REPOSITORY_LINK = 'https://github.com/rudnovd/daily-route'
 const repositoryLinkProps = (() => {
-  return VITE_IS_TAURI ? { onClick: openUrl(REPOSITORY_LINK) } : { href: REPOSITORY_LINK, target: '_blank' }
+  return VITE_IS_TAURI ? { onClick: () => openUrl(REPOSITORY_LINK) } : { href: REPOSITORY_LINK, target: '_blank' }
 })()
 </script>
 
@@ -152,6 +153,7 @@ const repositoryLinkProps = (() => {
     .version {
       font-size: 0.8rem;
       text-align: center;
+      text-decoration: underline;
     }
   }
 }
