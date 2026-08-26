@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@maptiler/sdk": "^4.1.0",
-    "@supabase/supabase-js": "^2.112.2",
+    "@supabase/supabase-js": "^2.112.3",
     "@tauri-apps/api": "^2.11.1",
     "@tauri-apps/plugin-deep-link": "~2.4.9",
     "@tauri-apps/plugin-geolocation": "~2.3.2",
@@ -40,8 +40,8 @@
     "geojson": "^0.5.0",
     "ky": "^2.0.2",
     "pinia": "^3.0.4",
-    "supabase": "^2.113.0",
-    "temporal-polyfill": "^1.0.3",
+    "supabase": "^2.115.0",
+    "temporal-polyfill": "^1.0.4",
     "v-wave": "^3.1.1",
     "vue": "^3.5.41",
     "vue-i18n": "^11.4.8",
@@ -50,8 +50,8 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^9.3.0",
-    "@commitlint/cli": "^21.2.1",
-    "@commitlint/config-conventional": "^21.2.0",
+    "@commitlint/cli": "^21.2.2",
+    "@commitlint/config-conventional": "^21.2.2",
     "@commitlint/types": "^21.2.0",
     "@iconify-json/mdi": "^1.2.3",
     "@tauri-apps/cli": "^2.11.4",
@@ -62,7 +62,7 @@
     "eslint-plugin-format": "^2.0.1",
     "postcss-html": "^1.8.1",
     "stylelint": "^17.14.1",
-    "stylelint-config-recess-order": "^7.7.0",
+    "stylelint-config-recess-order": "^7.8.0",
     "stylelint-config-standard": "^40.0.0",
     "stylelint-declaration-block-no-ignored-properties": "^3.0.0",
     "stylelint-order": "^8.1.1",
@@ -70,6 +70,6 @@
     "typescript": "~6.0.3",
     "unplugin-icons": "^23.0.1",
     "vite": "^8.2.1",
-    "vue-tsc": "^3.3.9"
+    "vue-tsc": "^3.3.10"
   }
 }
