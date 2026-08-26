@@ -25,15 +25,15 @@
         <div class="completed-route__title">
           <template v-if="routeStore.lastRoute?.status === 'finished'">
             {{ $t('index.dailyRouteFinished') }}
-            <Icon icon="mdi:check-bold" class="check-icon" />
+            <IconCheckBold class="color-success" />
           </template>
           <template v-else-if="routeStore.lastRoute?.status === 'frozen'">
             {{ $t('index.dailyRouteFrozen') }}
-            <Icon icon="mdi:snowfall" class="snowfall-icon" />
+            <IconSnowflake class="color-primary" />
           </template>
           <template v-else-if="routeStore.lastRoute?.status === 'canceled'">
             {{ $t('index.dailyRouteCanceled') }}
-            <Icon icon="mdi:close-thick" class="close-icon" />
+            <IconCloseThick class="color-error" />
           </template>
         </div>
         <span>
@@ -42,9 +42,9 @@
       </div>
       <div v-else-if="isFarFromStartPoint" class="route__far-from-start-placeholder">
         <div class="walk-container">
-          <Icon icon="mdi:walk" />
+          <IconWalk />
           <span class="walk-container__road" />
-          <Icon icon="mdi:map-marker" class="color-accent" />
+          <IconMapMarker class="color-accent" />
         </div>
         <span>
           {{ $t('index.tooFarFromStart') }}
@@ -82,7 +82,6 @@
 
 <script setup lang="ts">
 import type { UserRoute } from '@/types/route'
-import { Icon } from '@iconify/vue'
 import { LngLat } from '@maptiler/sdk'
 import { randomPoint } from '@turf/turf'
 import { whenever } from '@vueuse/core'
@@ -90,6 +89,11 @@ import { computed, defineAsyncComponent, ref, useTemplateRef, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { toast } from 'vue-sonner'
+import IconCheckBold from '~icons/mdi/check-bold'
+import IconCloseThick from '~icons/mdi/close-thick'
+import IconMapMarker from '~icons/mdi/map-marker'
+import IconSnowflake from '~icons/mdi/snowflake'
+import IconWalk from '~icons/mdi/walk'
 import { getUserRoutes } from '@/api/userRoute'
 import ButtonTransitionIcon from '@/components/ButtonTransitionIcon.vue'
 import RouteController from '@/components/route/RouteController.vue'
@@ -258,15 +262,6 @@ watch(() => routeStore.status, (newStatus) => {
       svg {
         width: 1em;
         height: 1em;
-      }
-      .check-icon {
-        color: var(--color-success);
-      }
-      .snowfall-icon {
-        color: var(--color-primary);
-      }
-      .close-icon {
-        color: var(--color-error);
       }
     }
   }

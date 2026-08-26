@@ -2,6 +2,7 @@ import { execFileSync } from 'node:child_process'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
 import vue from '@vitejs/plugin-vue'
+import Icons from 'unplugin-icons/vite'
 import { defineConfig } from 'vite'
 import VueRouter from 'vue-router/vite'
 import packageJson from './package.json' with { type: 'json' }
@@ -13,6 +14,7 @@ export default defineConfig(() => ({
   plugins: [
     vue(),
     VueRouter(),
+    Icons(),
   ],
   resolve: {
     alias: {

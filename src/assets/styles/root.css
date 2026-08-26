@@ -26,16 +26,19 @@
   --color-success: oklch(72.27% 0.192 149.58deg);
   --color-success-hover: oklch(64.5% 0.188 149.6deg);
   --color-success-active: oklch(56.5% 0.184 149.6deg);
+  --color-success-disabled: oklch(88% 0.08 149.6deg);
 
   /* Warning */
   --color-warning: oklch(76.86% 0.1647 70.08deg);
   --color-warning-hover: oklch(68.5% 0.162 70deg);
   --color-warning-active: oklch(60.5% 0.158 70deg);
+  --color-warning-disabled: oklch(90% 0.075 70deg);
 
   /* Error */
   --color-error: oklch(63.68% 0.2078 25.33deg);
   --color-error-hover: oklch(57.71% 0.2152 27.33deg);
   --color-error-active: oklch(51.5% 0.216 27.3deg);
+  --color-error-disabled: oklch(84% 0.09 27.3deg);
   @media (prefers-color-scheme: light) {
     /* Typography */
     --color-text: oklch(21.01% 0.0318 264.66deg);
@@ -113,6 +116,9 @@ ul {
   padding: 0;
   margin: 0;
   list-style: none;
+}
+.color-primary {
+  color: var(--color-primary);
 }
 .color-success {
   color: var(--color-success);

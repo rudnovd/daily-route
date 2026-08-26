@@ -73,16 +73,23 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/settings/edit': RouteRecordInfo<
-      '/settings/edit',
-      '/settings/edit',
+    '/settings/locale': RouteRecordInfo<
+      '/settings/locale',
+      '/settings/locale',
       Record<never, never>,
       Record<never, never>,
       | never
     >,
-    '/settings/locale': RouteRecordInfo<
-      '/settings/locale',
-      '/settings/locale',
+    '/settings/radius': RouteRecordInfo<
+      '/settings/radius',
+      '/settings/radius',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/settings/start': RouteRecordInfo<
+      '/settings/start',
+      '/settings/start',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -148,17 +155,25 @@ declare module 'vue-router/auto-routes' {
       pathParamNames:
         | never
     }
-    'src/pages/settings/edit.vue': {
+    'src/pages/settings/locale.vue': {
       routes:
-        | '/settings/edit'
+        | '/settings/locale'
       views:
         | never
       pathParamNames:
         | never
     }
-    'src/pages/settings/locale.vue': {
+    'src/pages/settings/radius.vue': {
       routes:
-        | '/settings/locale'
+        | '/settings/radius'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/pages/settings/start.vue': {
+      routes:
+        | '/settings/start'
       views:
         | never
       pathParamNames:

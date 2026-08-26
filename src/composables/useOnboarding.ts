@@ -48,11 +48,11 @@ export const useOnboarding = createSharedComposable(() => {
             align: 'center',
           },
           data: {
-            path: '/settings/edit?target=start',
+            path: '/settings/start',
           },
         },
         {
-          element: '[data-onboarding-element="save-target-button"]',
+          element: '[data-onboarding-element="save-button"]',
           popover: {
             description: t('onboarding.steps[1].description'),
             side: 'bottom',
@@ -61,11 +61,11 @@ export const useOnboarding = createSharedComposable(() => {
           },
           advanceOnClick: true,
           data: {
-            path: '/settings/edit?target=start',
+            path: '/settings/start',
           },
         },
         {
-          element: '[data-onboarding-element="map-container"]',
+          element: '[data-onboarding-element="radius-page"]',
           popover: {
             title: t('onboarding.steps[2].title'),
             description: t('onboarding.steps[2].description'),
@@ -73,11 +73,11 @@ export const useOnboarding = createSharedComposable(() => {
             align: 'center',
           },
           data: {
-            path: '/settings/edit?target=radius',
+            path: '/settings/radius',
           },
         },
         {
-          element: '[data-onboarding-element="save-target-button"]',
+          element: '[data-onboarding-element="save-button"]',
           popover: {
             description: t('onboarding.steps[3].description'),
             side: 'bottom',
@@ -86,7 +86,7 @@ export const useOnboarding = createSharedComposable(() => {
           },
           advanceOnClick: true,
           data: {
-            path: '/settings/edit?target=radius',
+            path: '/settings/radius',
           },
         },
         {

@@ -1,7 +1,7 @@
 <template>
   <header class="navigation-header">
     <button v-if="router.currentRoute.value.name !== '/'" class="icon-button icon-button--medium" @click="$router.back()">
-      <Icon icon="mdi:arrow-left" />
+      <IconArrowLeft />
     </button>
     <h1 v-if="router.currentRoute.value.meta.title">
       {{ $t(router.currentRoute.value.meta.title) }}
@@ -10,8 +10,8 @@
 </template>
 
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
 import { useRouter } from 'vue-router'
+import IconArrowLeft from '~icons/mdi/arrow-left'
 
 const router = useRouter()
 </script>
