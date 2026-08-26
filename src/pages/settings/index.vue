@@ -41,14 +41,17 @@
       <a
         v-if="!VITE_IS_TAURI"
         class="color-accent app-link"
-        href="https://github.com/rudnovd/daily-route/releases/latest"
+        :href="`${REPOSITORY_LINK}/releases/latest`"
         target="_blank"
       >
         {{ $t('settings.androidApp') }}
       </a>
-      <a href="https://github.com/rudnovd/daily-route" class="color-secondary version">
+      <component
+        :is="VITE_IS_TAURI ? 'button' : 'a'"
+        class="color-secondary version"
+        v-bind="repositoryLinkProps"
+      >
         {{ VITE_APP_VERSION }} ({{ VITE_GIT_COMMIT_SHA }})
-      </a>
       </component>
     </footer>
   </section>
@@ -56,6 +59,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { openUrl } from '@tauri-apps/plugin-opener'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { toast } from 'vue-sonner'
@@ -99,6 +103,11 @@ async function signOut(): Promise<void> {
     }
   }
 }
+
+const REPOSITORY_LINK = 'https://github.com/rudnovd/daily-route'
+const repositoryLinkProps = (() => {
+  return VITE_IS_TAURI ? { onClick: openUrl(REPOSITORY_LINK) } : { href: REPOSITORY_LINK, target: '_blank' }
+})()
 </script>
 
 <style>
