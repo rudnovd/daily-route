@@ -53,6 +53,11 @@
   "settings": {
     "title": "Settings",
     "androidApp": "Android app",
+    "groups": {
+      "dailyRoute": "Daily route",
+      "preferences": "Preferences",
+      "actions": "Actions"
+    },
     "locale": {
       "title": "Language",
       "selectLocale": "Select language"
@@ -61,6 +66,10 @@
       "title": "Start Point",
       "dragMapToSelectStartPoint": "Drag the map to select a starting point",
       "saved": "Start point saved"
+    },
+    "maxDistance": {
+      "title": "Maximum distance",
+      "shortTitle": "Max. distance"
     },
     "radius": {
       "selectRadius": "Select a radius for generating a random point for the daily route",

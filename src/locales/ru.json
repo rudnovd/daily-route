@@ -53,6 +53,11 @@
   "settings": {
     "title": "Настройки",
     "androidApp": "Приложение для Android",
+    "groups": {
+      "dailyRoute": "Ежедневный маршрут",
+      "preferences": "Предпочтения",
+      "actions": "Действия"
+    },
     "locale": {
       "title": "Язык",
       "selectLocale": "Выберите язык"

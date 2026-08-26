@@ -1,64 +1,43 @@
 <template>
   <section class="settings-page">
-    <ul>
-      <li>
-        <router-link
-          class="button-link settings-page__element"
-          :class="{ 'button-link--disabled': isLoading }"
-          to="/settings/locale"
-        >
-          <IconTranslate />
-          <span class="settings-page__element-text">{{ $t('settings.locale.title') }}</span>
-          <IconChevronRight />
-        </router-link>
-      </li>
-      <li>
-        <router-link
-          class="button-link settings-page__element"
-          :class="{ 'button-link--disabled': isLoading || !!routeStore.path }"
-          to="/settings/edit?target=start"
-        >
-          <IconMapMarker />
-          <span class="settings-page__element-text">{{ $t('settings.startPoint.title') }}</span>
-          <IconChevronRight />
-        </router-link>
-      </li>
-      <li>
-        <router-link
-          class="button-link settings-page__element"
-          :class="{ 'button-link--disabled': isLoading || !!routeStore.path }"
-          to="/settings/edit?target=radius"
-        >
-          <IconMapMarkerRadius />
-          <span class="settings-page__element-text">{{ $t('settings.radius.title') }}</span>
-          <IconChevronRight />
-        </router-link>
-      </li>
-      <li>
-        <router-link
-          class="button-link settings-page__element"
-          :class="{ 'button-link--disabled': isLoading || !!routeStore.path }"
-          to="/onboarding"
-        >
-          <IconSchool />
-          <span class="settings-page__element-text">{{ $t('settings.onboarding.title') }}</span>
-          <IconChevronRight />
-        </router-link>
-      </li>
-      <li v-if="userStore.user">
-        <ButtonTransitionIcon
-          size="0.8em"
-          :disabled="!userStore.isOnline"
-          class="settings-page__element"
-          @transitionend="signOut"
-        >
-          <IconLogout />
-          <span class="settings-page__element-text">{{ $t('settings.signOut.title') }}</span>
-          <IconChevronRight />
-        </ButtonTransitionIcon>
-      </li>
-    </ul>
-    <div class="settings-page__footer">
+    <SettingsGroup :title="$t('settings.groups.dailyRoute')">
+      <SettingsGroupItem
+        :icon="IconMapMarker"
+        :title="$t('settings.startPoint.title')"
+        :disabled="isLoading || !!routeStore.path"
+        to="/settings/start"
+      />
+      <SettingsGroupItem
+        :icon="IconRuler"
+        :title="$t('settings.maxDistance.title')"
+        :disabled="isLoading || !!routeStore.path"
+        to="/settings/radius"
+      />
+    </SettingsGroup>
+    <SettingsGroup :title="$t('settings.groups.preferences')">
+      <SettingsGroupItem
+        :icon="IconTranslate"
+        :title="$t('settings.locale.title')"
+        :disabled="isLoading"
+        to="/settings/locale"
+      />
+    </SettingsGroup>
+    <SettingsGroup :title="$t('settings.groups.actions')">
+      <SettingsGroupItem
+        :icon="IconSchool"
+        :title="$t('settings.onboarding.title')"
+        :disabled="isLoading || !!routeStore.path"
+        to="/onboarding"
+      />
+      <SettingsGroupItem
+        v-if="userStore.user"
+        :icon="IconLogout"
+        :title="$t('settings.signOut.title')"
+        :disabled="isLoading || !userStore.isOnline"
+        @click="isSignOutDialogActive = true"
+      />
+    </SettingsGroup>
+    <footer class="settings-page__footer">
       <a
         v-if="!VITE_IS_TAURI"
         class="color-accent app-link"
@@ -70,7 +49,8 @@
       <a href="https://github.com/rudnovd/daily-route" class="color-secondary version">
         {{ VITE_APP_VERSION }} ({{ VITE_GIT_COMMIT_SHA }})
       </a>
-    </div>
+      </component>
+    </footer>
   </section>
 </template>
 
@@ -79,13 +59,13 @@ import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { toast } from 'vue-sonner'
-import IconChevronRight from '~icons/mdi/chevron-right'
 import IconLogout from '~icons/mdi/logout'
 import IconMapMarker from '~icons/mdi/map-marker'
-import IconMapMarkerRadius from '~icons/mdi/map-marker-radius'
+import IconRuler from '~icons/mdi/ruler'
 import IconSchool from '~icons/mdi/school'
 import IconTranslate from '~icons/mdi/translate'
-import ButtonTransitionIcon from '@/components/ButtonTransitionIcon.vue'
+import SettingsGroup from '@/components/settings/SettingsGroup.vue'
+import SettingsGroupItem from '@/components/settings/SettingsGroupItem.vue'
 import { useRouteStore } from '@/stores/route'
 import { useUserStore } from '@/stores/user'
 
@@ -124,33 +104,10 @@ async function signOut(): Promise<void> {
 <style>
 .settings-page {
   display: grid;
-  grid-template-rows: 1fr auto;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 2rem;
   align-items: start;
   padding-inline: var(--content-padding-inline);
-  ul {
-    display: grid;
-    gap: 1rem;
-    li {
-      display: flex;
-      overflow: hidden;
-      .settings-page__element {
-        gap: 0.5rem;
-        width: 100%;
-        padding-block: 0.25rem;
-        padding-inline: 0;
-        .settings-page__element-text {
-          flex: 1 0 0;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          text-align: left;
-          white-space: nowrap;
-        }
-      }
-      .button-transition-icon {
-        width: 100%;
-      }
-    }
-  }
   .settings-page__footer {
     display: grid;
     gap: 0.5rem;
