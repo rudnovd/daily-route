@@ -84,6 +84,13 @@
     },
     "signOut": {
       "title": "Выйти",
+      "dialog": {
+        "text": "Хотите выйти?",
+        "buttons": {
+          "stay": "Остаться",
+          "signOut": "Выйти"
+        }
+      },
       "notifications": {
         "signOutFromAccountSuccess": "Вы вышли из своей учетной записи",
         "signOutFromAccountError": "Ошибка при выходе из учетной записи"

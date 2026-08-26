@@ -24,7 +24,7 @@
     </header>
     <div class="base-dialog__content">
       <button
-        v-if="closable"
+        v-if="closable && !title"
         type="button"
         class="base-dialog__close-button"
         @click="close"

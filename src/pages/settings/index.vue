@@ -54,12 +54,32 @@
         {{ VITE_APP_VERSION }} ({{ VITE_GIT_COMMIT_SHA }})
       </component>
     </footer>
+    <BaseDialog v-if="isSignOutDialogActive" v-model="isSignOutDialogActive" :title="$t('settings.signOut.title')">
+      {{ $t('settings.signOut.dialog.text') }}
+      <template #footer>
+        <button
+          v-wave
+          class="button-error"
+          :disabled="isLoading || !userStore.isOnline"
+          @click="isSignOutDialogActive = false"
+        >
+          {{ $t('settings.signOut.dialog.buttons.stay') }}
+        </button>
+        <button
+          v-wave class="button-primary"
+          :disabled="isLoading || !userStore.isOnline"
+          @click="signOut"
+        >
+          {{ $t('settings.signOut.dialog.buttons.signOut') }}
+        </button>
+      </template>
+    </BaseDialog>
   </section>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import { openUrl } from '@tauri-apps/plugin-opener'
+import { defineAsyncComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { toast } from 'vue-sonner'
@@ -75,12 +95,15 @@ import { useUserStore } from '@/stores/user'
 
 definePage({ meta: { title: 'settings.title', displayTitle: true } })
 
+const BaseDialog = defineAsyncComponent(() => import('@/components/BaseDialog.vue'))
+
 const { VITE_APP_VERSION, VITE_GIT_COMMIT_SHA, VITE_IS_TAURI } = import.meta.env
 const { t } = useI18n()
 const userStore = useUserStore()
 const routeStore = useRouteStore()
 const router = useRouter()
 
+const isSignOutDialogActive = ref<boolean>(false)
 const isLoading = ref<boolean>(false)
 async function signOut(): Promise<void> {
   isLoading.value = true
@@ -92,6 +115,7 @@ async function signOut(): Promise<void> {
   finally {
     try {
       await userStore.signOut()
+      isSignOutDialogActive.value = false
       toast.success(t('settings.signOut.notifications.signOutFromAccountSuccess'))
       router.push('/')
     }
