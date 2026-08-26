@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.8.0](https://github.com/rudnovd/daily-route/compare/v0.7.0...v0.8.0) (2026-08-26)
+
+
+### Features
+
+* **onboarding:** update steps paths and targets ([b0d0784](https://github.com/rudnovd/daily-route/commit/b0d0784ebcd0256150161bfd66832ca05f9e9c7f))
+* **pages:** split edit page to 'radius' and 'start' pages ([8a09539](https://github.com/rudnovd/daily-route/commit/8a095399a4117194e86d655b6dd1832248adf41d))
+* **settings:** add sign-out confirmation ([c483bb7](https://github.com/rudnovd/daily-route/commit/c483bb7d6ec89919b54f4db254cf7112ee8be5ee))
+* **settings:** refactor settings page with new group and item components ([c79263e](https://github.com/rudnovd/daily-route/commit/c79263e6dd972291595646180938fc5e091a1218))
+* **settings:** update repository link handling ([146d882](https://github.com/rudnovd/daily-route/commit/146d8828228577f651071f670b88b699d4074048))
+
+
+### Reverts
+
+* use unplugin-icons instead @iconify/vue ([0929e29](https://github.com/rudnovd/daily-route/commit/0929e297be5338a285dc543e82943665bc0f5067))
+
 ## [0.7.0](https://github.com/rudnovd/daily-route/compare/v0.6.0...v0.7.0) (2026-08-20)
 
 
