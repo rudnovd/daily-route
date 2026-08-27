@@ -78,6 +78,7 @@ watch(model, async (open) => {
 <style>
 .base-dialog {
   width: 100%;
+  min-width: 300px;
   padding: 0;
   outline: none;
   background: var(--color-surface-background);
@@ -105,24 +106,27 @@ watch(model, async (open) => {
     align-items: center;
     justify-content: space-between;
     padding: var(--content-padding-inline);
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--color-text);
     h2 {
       margin: 0;
+      font-size: 1.3em;
     }
   }
   .base-dialog__close-button {
+    padding: 0;
     margin-left: auto;
     font-size: 1.2rem;
   }
   .base-dialog__content {
-    padding: var(--content-padding-inline);
+    padding-block: calc(var(--content-padding-inline) * 1.5);
+    padding-inline: var(--content-padding-inline);
   }
   .base-dialog__footer {
     display: flex;
     gap: 8px;
     justify-content: flex-end;
-    padding: 16px 20px;
-    border-top: 1px solid #eee;
+    padding: var(--content-padding-inline);
+    border-top: 1px solid var(--color-text);
   }
 }
 </style>

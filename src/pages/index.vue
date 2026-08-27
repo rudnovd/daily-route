@@ -11,13 +11,13 @@
       </WalkerLoading>
       <div v-else-if="!userStore.dailyRouteStartPosition" class="route__placeholder">
         <span>{{ $t('index.startNotSet') }}</span>
-        <router-link v-wave class="button-link button-primary" to="/settings/edit?target=start">
+        <router-link v-wave class="button-link button-primary" to="/settings/start">
           {{ $t('index.setStart') }}
         </router-link>
       </div>
       <div v-else-if="!userStore.radiusBbox" class="route__placeholder">
         <span>{{ $t('index.radiusNotSet') }}</span>
-        <router-link v-wave class="button-primary button-link" to="/settings/edit?target=radius">
+        <router-link v-wave class="button-primary button-link" to="/settings/radius">
           {{ $t('index.setRadius') }}
         </router-link>
       </div>
@@ -25,15 +25,21 @@
         <div class="completed-route__title">
           <template v-if="routeStore.lastRoute?.status === 'finished'">
             {{ $t('index.dailyRouteFinished') }}
-            <IconCheckBold class="color-success" />
+            <div class="completed-route__title-icon">
+              <IconCheckBold class="color-success" />
+            </div>
           </template>
           <template v-else-if="routeStore.lastRoute?.status === 'frozen'">
             {{ $t('index.dailyRouteFrozen') }}
-            <IconSnowflake class="color-primary" />
+            <div class="completed-route__title-icon">
+              <IconSnowflake class="completed-route__title-icon color-primary" />
+            </div>
           </template>
           <template v-else-if="routeStore.lastRoute?.status === 'canceled'">
             {{ $t('index.dailyRouteCanceled') }}
-            <IconCloseThick class="color-error" />
+            <div class="completed-route__title-icon">
+              <IconCloseThick class="completed-route__title-icon color-error" />
+            </div>
           </template>
         </div>
         <span>
@@ -259,9 +265,14 @@ watch(() => routeStore.status, (newStatus) => {
   .route__completed-route {
     align-items: center;
     .completed-route__title {
-      svg {
-        width: 1em;
-        height: 1em;
+      display: flex;
+      flex-direction: column;
+      .completed-route__title-icon {
+        text-align: center;
+        svg {
+          width: 3em;
+          height: 3em;
+        }
       }
     }
   }
