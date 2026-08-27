@@ -74,7 +74,7 @@ import { IS_ONBOARDING_FINISHED_KEY } from '@/constants/onboarding'
 import { useUserStore } from '@/stores/user'
 
 definePage({
-  meta: { title: 'settings.maxDistance.shortTitle', displayTitle: true },
+  meta: { title: 'settings.maxDistance.title', displayTitle: true },
   beforeEnter() {
     if (!useUserStore().dailyRouteStartPosition) {
       toast.error('Start point not set')

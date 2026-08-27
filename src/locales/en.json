@@ -29,7 +29,7 @@
     "tooFarFromStart": "Too far from the starting point",
     "routeCancelled": "Route cancelled",
     "routeCompleted": "Route completed",
-    "dailyRouteFinished": "Today’s daily route is на сегодня завершен",
+    "dailyRouteFinished": "Today’s daily route is completed for today",
     "dailyRouteFrozen": "Today's daily route is frozen",
     "dailyRouteCanceled": "Today's daily route has been cancelled",
     "comeBackTomorrow": "Come back tomorrow",
@@ -68,8 +68,7 @@
       "saved": "Start point saved"
     },
     "maxDistance": {
-      "title": "Maximum distance",
-      "shortTitle": "Max. distance"
+      "title": "Max. distance"
     },
     "radius": {
       "selectRadius": "Select a radius for generating a random point for the daily route",
