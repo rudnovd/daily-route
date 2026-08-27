@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.9.0](https://github.com/rudnovd/daily-route/compare/v0.8.0...v0.9.0) (2026-08-27)
+
+
+### Features
+
+* **BaseDialog:** update component styles ([c4db8f1](https://github.com/rudnovd/daily-route/commit/c4db8f1212428a65e2075e7475afeba3b92f285d))
+* **index-page:** update completed route styles ([aebbbdc](https://github.com/rudnovd/daily-route/commit/aebbbdc41783933842ea5e4b808ca83967c71fb1))
+* **styles:** set min-width for body, add fallback fonts ([0b0f404](https://github.com/rudnovd/daily-route/commit/0b0f404c3163dea7a03befdeb1e47f3a688c30db))
+
+
+### Bug Fixes
+
+* **index-page:** fix wrong links ([027e2fb](https://github.com/rudnovd/daily-route/commit/027e2fbf7b31c1a673108c726d3633dd386ffd49))
+* **locales:** fix tokens, remove long 'maxDistance' title ([5133384](https://github.com/rudnovd/daily-route/commit/5133384e979b7d52c82842abd4475369ca3db992))
+* **settings-page:** fix wrong repository link props, update styles ([9fb60f9](https://github.com/rudnovd/daily-route/commit/9fb60f9e0f47001fe8bd61f0ae23ef331ebdd7ea))
+
 ## [0.8.0](https://github.com/rudnovd/daily-route/compare/v0.7.0...v0.8.0) (2026-08-26)
 
 
