@@ -31,18 +31,18 @@ interface StreakCalendarDate {
   showStatus: boolean
 }
 const streakCalendarDates = ref<Array<StreakCalendarDate>>([])
+const DISPLAYED_DAYS = 4
+const now = Temporal.PlainDate.from(Temporal.Now.plainDateISO('UTC'))
+const substractedDate = now.subtract(Temporal.Duration.from({ days: DISPLAYED_DAYS }))
+const routeStore = useRouteStore()
 function formatStreakDate(date: Temporal.PlainDate): StreakCalendarDate {
   return {
     plainDate: date,
     isCompleted: false,
     formattedMonthString: new Intl.DateTimeFormat(getAppLocale(), { month: 'long' }).format(date),
-    showStatus: true,
+    showStatus: date.until(now).days !== 0,
   }
 }
-const DISPLAYED_DAYS = 4
-const now = Temporal.PlainDate.from(Temporal.Now.plainDateISO())
-const substractedDate = now.subtract(Temporal.Duration.from({ days: DISPLAYED_DAYS }))
-const routeStore = useRouteStore()
 onMounted(() => {
   for (let i = 2; i <= DISPLAYED_DAYS + 1; i++) {
     const date = substractedDate.add(Temporal.Duration.from({ days: i }))
@@ -56,9 +56,11 @@ onMounted(() => {
       if (streakDate) {
         if (dailyRoute.status === 'finished') {
           streakDate.isCompleted = true
+          streakDate.showStatus = true
         }
         else if (dailyRoute.status === 'canceled') {
           streakDate.isCompleted = false
+          streakDate.showStatus = true
         }
         else {
           streakDate.showStatus = false
@@ -68,7 +70,7 @@ onMounted(() => {
     }
     if (dailyRoute.status === 'finished' && dailyRoute.finished_at) {
       const plainDate = Temporal.PlainDate.from(dailyRoute.finished_at)
-      const streakDate = streakCalendarDates.value.find(streakDay => streakDay.plainDate.day === plainDate.day)
+      const streakDate = streakCalendarDates.value.find(streakDay => plainDate.since(streakDay.plainDate).days === 0)
       if (streakDate) {
         streakDate.isCompleted = true
       }

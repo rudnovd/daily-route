@@ -6,11 +6,13 @@ type ms = number
 interface Stopwatch {
   duration: ms
   isStarted: boolean
+  lastTimestamp: ms
 }
 export const useStopwatch = createSharedComposable(() => {
   const stopwatch = useLocalStorage<Stopwatch>('stopwatch', {
     duration: 0,
     isStarted: false,
+    lastTimestamp: 0,
   })
   let timestamp: ReturnType<Performance['now']> = performance.now()
   const duration = ref<Stopwatch['duration']>(stopwatch.value.duration)
@@ -28,10 +30,15 @@ export const useStopwatch = createSharedComposable(() => {
     duration.value += currentTimestamp - timestamp
     timestamp = currentTimestamp
   }
-  function start() {
+  function start(startTime?: ms) {
     if (intervalID) {
       return
     }
+    const now = Temporal.Now.instant().epochMilliseconds
+    if (startTime) {
+      duration.value += now - startTime
+    }
+    stopwatch.value.lastTimestamp = now
     stopwatch.value.isStarted = true
     timestamp = performance.now()
     updateDuration()
@@ -64,9 +71,10 @@ export const useStopwatch = createSharedComposable(() => {
   })
   watch(value, () => {
     stopwatch.value.duration = duration.value
+    stopwatch.value.lastTimestamp = Temporal.Now.instant().epochMilliseconds
   })
   if (stopwatch.value.isStarted) {
-    start()
+    start(stopwatch.value.lastTimestamp)
   }
 
   return {

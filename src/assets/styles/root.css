@@ -67,7 +67,7 @@
   --duration-long: 3s;
   --icon-button-medium-size: 3rem;
   --icon-button-large-size: 4rem;
-  --navigation-header-padding-top: 32px;
+  --navigation-header-padding-top: env(safe-area-inset-top);
   --navigation-header-height: var(--icon-button-large-size);
   --header-horizontal-rule-margin-block: 0.5rem;
   --header-horizontal-rule-border-width: 1px;
@@ -76,7 +76,7 @@
       calc(var(--header-horizontal-rule-margin-block) * 2) + calc(var(--header-horizontal-rule-border-width) * 2)
   );
   --navbar-height: 4rem;
-  --navbar-position-bottom: 64px;
+  --navbar-position-bottom: calc(env(safe-area-inset-bottom) + 8px);
   --content-padding-inline: 1rem;
 }
 html {

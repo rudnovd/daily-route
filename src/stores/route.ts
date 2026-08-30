@@ -68,7 +68,7 @@ export const useRouteStore = defineStore('route', {
         return acc
       }, {})
       let streak = 0
-      let dateToCompare = Temporal.PlainDate.from(Temporal.Now.plainDateISO())
+      let dateToCompare = Temporal.PlainDate.from(Temporal.Now.plainDateISO('UTC'))
       for (const date in datesStatuses) {
         const plainDate = Temporal.PlainDate.from(date)
         const daysUntilDateToCompare = plainDate.until(dateToCompare).days

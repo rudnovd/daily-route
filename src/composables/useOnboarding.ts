@@ -80,7 +80,7 @@ export const useOnboarding = createSharedComposable(() => {
           element: '[data-onboarding-element="save-button"]',
           popover: {
             description: t('onboarding.steps[3].description'),
-            side: 'bottom',
+            side: 'top',
             align: 'center',
             disableButtons: ['next'],
           },
