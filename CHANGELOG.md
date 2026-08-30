@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.10.0](https://github.com/rudnovd/daily-route/compare/v0.9.0...v0.10.0) (2026-08-30)
+
+
+### Features
+
+* **onboarding:** update styles ([903d0d4](https://github.com/rudnovd/daily-route/commit/903d0d4d871610c774d042137766c9347c5a6f5d))
+* **styles:** use `safe-area-inset` for header and navbar paddings ([03bfa82](https://github.com/rudnovd/daily-route/commit/03bfa82ac7c1d6f26a4e2a01157cf7ea42dc489d))
+* **useStopwatch:** enhance functionality with lastTimestamp tracking ([37e5c9d](https://github.com/rudnovd/daily-route/commit/37e5c9d264a75a869c45814dde8b416c730abc6a))
+
+
+### Bug Fixes
+
+* **App:** do not restore old state ([bef78be](https://github.com/rudnovd/daily-route/commit/bef78be89b41f063fc064541da1cf1acc5bba0a0))
+* **App:** reset old state ([17537fe](https://github.com/rudnovd/daily-route/commit/17537fef0be0bfbc699d963bb4a021ace97e31e5))
+* **StreakCalendar:** fix wrong status displaying, update streak calculation ([5c51e9f](https://github.com/rudnovd/daily-route/commit/5c51e9f4d14dc3d74d50d546d660bd6eabd13572))
+
 ## [0.9.0](https://github.com/rudnovd/daily-route/compare/v0.8.0...v0.9.0) (2026-08-27)
 
 
