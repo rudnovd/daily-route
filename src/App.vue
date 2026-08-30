@@ -105,8 +105,11 @@ whenever(() => userStore.isAuthenticated, async () => {
     }
   }
   if (routeStore.lastRoute && (routeStore.lastRoute.status === 'generated' || routeStore.isStartedStatus(routeStore.lastRoute.status))) {
-    routeStore.state = routeStore.lastRoute
-    routeStore.calculateCurrentRoutePath()
+    const createdAt = Temporal.PlainDate.from(routeStore.lastRoute.created_at)
+    if (createdAt.until(now).days === 0) {
+      routeStore.state = routeStore.lastRoute
+      routeStore.calculateCurrentRoutePath()
+    }
   }
 }, { immediate: true })
 </script>
