@@ -96,6 +96,14 @@ supabase.auth.onAuthStateChange((_, session) => {
 const routeStore = useRouteStore()
 whenever(() => userStore.isAuthenticated, async () => {
   await routeStore.getRoutes()
+  const now = Temporal.Now.plainDateISO('UTC')
+  if (routeStore.state) {
+    const createdAt = Temporal.PlainDate.from(routeStore.state.created_at)
+    if (createdAt.until(now).days > 0) {
+      routeStore.state = null
+      routeStore.path = null
+    }
+  }
   if (routeStore.lastRoute && (routeStore.lastRoute.status === 'generated' || routeStore.isStartedStatus(routeStore.lastRoute.status))) {
     routeStore.state = routeStore.lastRoute
     routeStore.calculateCurrentRoutePath()
