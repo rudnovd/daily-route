@@ -175,6 +175,8 @@ async function save() {
     flex-direction: column;
     gap: 0.5rem;
     padding-inline: var(--content-padding-inline);
+    overflow: auto;
+    scrollbar-width: thin;
   }
 }
 </style>
