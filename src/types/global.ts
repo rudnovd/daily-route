@@ -5,6 +5,5 @@ declare module 'vue-router' {
     title?: string
     displayTitle?: boolean
     isNavbarHidden?: boolean
-    hideTopPadding?: boolean
   }
 }

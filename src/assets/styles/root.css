@@ -85,6 +85,24 @@ html {
   accent-color: var(--color-accent);
   background-color: var(--color-background);
 }
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
+  padding-top: var(--navigation-header-padding-top);
+  overflow: hidden;
+  &.hide-top-padding {
+    padding-top: 0;
+  }
+  > section {
+    flex: 1;
+    overflow: auto;
+  }
+}
+#app {
+  height: 100%;
+}
 body {
   min-width: 320px;
   height: 100%;
@@ -99,23 +117,15 @@ body {
     Arial,
     sans-serif;
   font-size: 1.25rem;
-}
-#app {
-  height: 100%;
-}
-main {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  height: calc(100% - var(--navbar-height) - var(--navbar-position-bottom));
-  padding-top: var(--navigation-header-padding-top);
-  overflow: hidden;
-  &.hide-top-padding {
-    padding-top: 0;
+  &:has(.navigation-header) main {
+    height: calc(100% - var(--header-height));
   }
-  > section {
-    flex: 1;
-    overflow: auto;
+  &:has(.navbar) main {
+    height: calc(100% - var(--navbar-height) - var(--navbar-position-bottom));
+  }
+  &:has(.navigation-header):has(.navbar) main {
+    height: calc(100% - var(--header-height) - var(--navbar-height) - var(--navbar-position-bottom));
+  }
   }
 }
 a {
