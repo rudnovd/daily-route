@@ -126,6 +126,8 @@ body {
   &:has(.navigation-header):has(.navbar) main {
     height: calc(100% - var(--header-height) - var(--navbar-height) - var(--navbar-position-bottom));
   }
+  &:has(.driver-overlay) #app {
+    scale: 0.8;
   }
 }
 a {
