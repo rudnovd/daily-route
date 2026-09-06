@@ -21,7 +21,7 @@ export const i18n = createI18n({
     ru: pluralizationRu,
   },
 })
-export async function loadLocaleMessages(locale: Locale): Promise<Record<string, any>> {
+export async function loadLocaleMessages(locale: Locale): Promise<{ default: Record<string, string> }> {
   return await import(`./locales/${locale}.json`, { with: { type: 'json' } })
 }
 export async function setLocale(locale: Locale) {
