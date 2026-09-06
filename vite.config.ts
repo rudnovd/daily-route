@@ -12,8 +12,8 @@ const host = process.env.TAURI_DEV_HOST
 
 export default defineConfig(() => ({
   plugins: [
+    VueRouter({ dts: 'src/types/typed-router.d.ts' }),
     vue(),
-    VueRouter(),
     Icons(),
   ],
   resolve: {
