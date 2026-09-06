@@ -10,7 +10,7 @@ import packageJson from './package.json' with { type: 'json' }
 const commitSha = execFileSync('git', ['rev-parse', '--short', 'HEAD'], { encoding: 'utf8' }).trim()
 const host = process.env.TAURI_DEV_HOST
 
-export default defineConfig(() => ({
+export default defineConfig({
   plugins: [
     VueRouter({ dts: 'src/types/typed-router.d.ts' }),
     vue(),
@@ -29,8 +29,14 @@ export default defineConfig(() => ({
     port: 1420,
     strictPort: true,
     host: host || false,
-    hmr: host ? { protocol: 'ws', host, port: 1421 } : undefined,
+    ws: host
+      ? {
+          protocol: 'ws',
+          host,
+          port: 1421,
+        }
+      : false,
     watch: { ignored: ['**/src-tauri/**'] },
   },
   clearScreen: false, // prevent Vite from obscuring rust errors
-}))
+})
