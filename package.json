@@ -14,7 +14,8 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "start": "vite",
-    "build": "vue-tsc && vite build",
+    "build": "vite build",
+    "typecheck": "vue-tsc",
     "preview": "vite preview",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
