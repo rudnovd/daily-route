@@ -87,6 +87,7 @@
 </template>
 
 <script setup lang="ts">
+import type { ComponentInstance } from 'vue'
 import type { UserRoute } from '@/types/route'
 import { LngLat } from '@maptiler/sdk'
 import { randomPoint } from '@turf/turf'
@@ -121,7 +122,7 @@ const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent)
 const isOnboardingFinished = localStorage.getItem(IS_ONBOARDING_FINISHED_KEY) === 'true'
 
 const routeStore = useRouteStore()
-const mapRef = useTemplateRef('mapElement')
+const mapRef = useTemplateRef<ComponentInstance<typeof RouteMap>>('mapElement')
 const isMapLoading = ref<boolean>(!mapRef.value?.isReady)
 whenever(() => mapRef.value?.isReady, () => {
   isMapLoading.value = false
