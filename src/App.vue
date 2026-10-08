@@ -1,13 +1,13 @@
 <template>
   <NavigationHeader v-if="isTitleDisplayed" />
   <hr v-if="isTitleDisplayed">
-  <RouterView v-slot="{ Component }">
-    <main>
+  <main>
+    <RouterView v-slot="{ Component }">
       <KeepAlive include="index">
         <component :is="Component" />
       </KeepAlive>
-    </main>
-  </RouterView>
+    </RouterView>
+  </main>
   <Navbar v-if="routerIsReady && !router.currentRoute.value.meta.isNavbarHidden" />
   <NoConnectionBadge v-if="!userStore.isOnline" />
   <Toaster theme="system" position="top-center" :toast-options="{ class: 'notification' }" />
