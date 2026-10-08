@@ -1,25 +1,19 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "lib": ["esnext", "DOM"],
-    "rootDir": ".",
+    "lib": ["esnext", "DOM", "DOM.Iterable"],
     "moduleResolution": "bundler",
     "paths": { "@/*": ["./src/*"] },
     "resolveJsonModule": true,
-    "types": ["unplugin-icons/types/vue"],
-    "importHelpers": true,
+    "types": ["vite/client", "unplugin-icons/types/vue"],
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "noEmit": true,
-    "removeComments": true,
-    "sourceMap": true,
     "verbatimModuleSyntax": true,
     "skipLibCheck": true
   },
+  "include": ["src/**/*.ts", "src/**/*.vue"],
   "vueCompilerOptions": {
-    "plugins": [
-      "vue-router/volar/sfc-route-blocks",
-      "vue-router/volar/sfc-typed-router"
-    ]
-  },
-  "references": [{ "path": "./tsconfig.node.json" }],
-  "include": ["src/**/*.ts", "src/**/*.vue", "./typed-router.d.ts"]
+    "plugins": ["vue-router/volar/sfc-typed-router"]
+  }
 }

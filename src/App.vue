@@ -2,7 +2,7 @@
   <NavigationHeader v-if="isTitleDisplayed" />
   <hr v-if="isTitleDisplayed">
   <RouterView v-slot="{ Component }">
-    <main :class="{ 'hide-top-padding': router.currentRoute.value.meta.hideTopPadding }">
+    <main>
       <KeepAlive include="index">
         <component :is="Component" />
       </KeepAlive>
@@ -124,9 +124,5 @@ whenever(() => userStore.isAuthenticated, async () => {
   margin-block: var(--header-horizontal-rule-margin-block);
   border-width: var(--header-horizontal-rule-border-width);
   opacity: 0.6;
-}
-.navigation-header + hr + main {
-  height: calc(100% - var(--header-height) - var(--navbar-height) - var(--navbar-position-bottom));
-  padding-top: 0;
 }
 </style>

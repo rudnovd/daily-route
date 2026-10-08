@@ -112,7 +112,7 @@ import { IS_ONBOARDING_FINISHED_KEY } from '@/constants/onboarding'
 import { useRouteStore } from '@/stores/route'
 import { useUserStore } from '@/stores/user'
 
-definePage({ meta: { title: 'index.title', hideTopPadding: true } })
+definePage({ meta: { title: 'index.title' } })
 
 const RouteConfirmationDialog = defineAsyncComponent(() => import('@/components/route/RouteConfirmationDialog.vue'))
 const QrElement = defineAsyncComponent(() => import('@/components/QrElement.vue'))

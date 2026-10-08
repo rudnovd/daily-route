@@ -322,6 +322,8 @@ function selectRadius(radius: number) {
     flex-direction: column;
     gap: 0.5rem;
     padding-inline: var(--content-padding-inline);
+    overflow: auto;
+    scrollbar-width: thin;
     .radius-text {
       height: calc(1.25rem * 3 * 1.2);
     }

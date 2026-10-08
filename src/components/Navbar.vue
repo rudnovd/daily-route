@@ -57,7 +57,7 @@ const userStore = useUserStore()
     a {
       flex-direction: column;
       padding-block: 0.25rem;
-      padding-inline: 0;
+      padding-inline: 0.5rem;
       font-size: 0.8rem;
       opacity: 0.6;
       &.router-link-active {
