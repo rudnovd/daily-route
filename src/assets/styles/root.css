@@ -90,11 +90,7 @@ main {
   flex-direction: column;
   gap: 8px;
   height: 100%;
-  padding-top: var(--navigation-header-padding-top);
   overflow: hidden;
-  &.hide-top-padding {
-    padding-top: 0;
-  }
   > section {
     flex: 1;
     overflow: auto;
