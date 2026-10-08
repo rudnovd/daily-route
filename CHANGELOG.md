@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.11.0](https://github.com/rudnovd/daily-route/compare/v0.10.0...v0.11.0) (2026-10-08)
+
+
+### Features
+
+* **navbar:** add `padding-inline` for links ([c862c1b](https://github.com/rudnovd/daily-route/commit/c862c1bfba8e4b030285eee9bc80551efe254204))
+* **onboarding:** set `#app` `scale` to 0.8 when onboarding active ([20b242e](https://github.com/rudnovd/daily-route/commit/20b242e60183464665633d1eed892245788bf9bd))
+
+
+### Bug Fixes
+
+* **settings:** update overflow handling ([9988a99](https://github.com/rudnovd/daily-route/commit/9988a99ea3ee8d40243514818f7c09203f51f24c))
+
 ## [0.10.0](https://github.com/rudnovd/daily-route/compare/v0.9.0...v0.10.0) (2026-08-30)
 
 
