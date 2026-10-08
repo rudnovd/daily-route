@@ -5,7 +5,7 @@ import type { Locale } from 'vue-i18n'
 import { openUrl } from '@tauri-apps/plugin-opener'
 import { useLocalStorage, useOnline } from '@vueuse/core'
 import { defineStore } from 'pinia'
-import { getAppLocale } from '@/i18n'
+import { getAppLocale, setLocale } from '@/i18n'
 import { supabase } from '@/supabase'
 
 interface UserSettings {
@@ -155,6 +155,7 @@ export const useUserStore = defineStore('user', {
     },
     async changeLocale(locale: Locale) {
       this.settings.locale = locale
+      setLocale(locale)
     },
   },
 })

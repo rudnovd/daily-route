@@ -33,7 +33,6 @@ const locales: ReadonlyArray<{ title: string, value: Locale }> = [
 function setLocale(event: Event) {
   const target = event.target as HTMLInputElement
   userStore.changeLocale(target.value)
-  location.replace(location.origin)
 }
 </script>
 
