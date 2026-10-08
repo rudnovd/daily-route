@@ -1,5 +1,4 @@
 import { execFileSync } from 'node:child_process'
-import process from 'node:process'
 import { fileURLToPath } from 'node:url'
 import vue from '@vitejs/plugin-vue'
 import Icons from 'unplugin-icons/vite'
@@ -8,8 +7,6 @@ import VueRouter from 'vue-router/vite'
 import packageJson from './package.json' with { type: 'json' }
 
 const commitSha = execFileSync('git', ['rev-parse', '--short', 'HEAD'], { encoding: 'utf8' }).trim()
-const host = process.env.TAURI_DEV_HOST
-
 export default defineConfig({
   plugins: [
     VueRouter({ dts: 'src/types/typed-router.d.ts' }),
@@ -28,15 +25,7 @@ export default defineConfig({
   server: {
     port: 1420,
     strictPort: true,
-    host: host || false,
-    ws: host
-      ? {
-          protocol: 'ws',
-          host,
-          port: 1421,
-        }
-      : false,
     watch: { ignored: ['**/src-tauri/**'] },
   },
-  clearScreen: false, // prevent Vite from obscuring rust errors
+  clearScreen: false,
 })
